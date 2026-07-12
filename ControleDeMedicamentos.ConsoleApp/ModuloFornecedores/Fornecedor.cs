@@ -31,6 +31,8 @@ public class Fornecedor : EntidadeBase
         if (!Regex.IsMatch(Cnpj, @"^\d{2}\.?\d{3}\.?\d{3}\/?\d{4}-?\d{2}$"))
             erros.Add("O campo \"CNPJ\" deve conter 14 dígitos.");
 
+
+
         return erros;
     }
 

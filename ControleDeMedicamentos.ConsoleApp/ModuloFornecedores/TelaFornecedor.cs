@@ -12,7 +12,7 @@ public class TelaFornecedor : TelaBase<Fornecedor>, ITelaOpcoes, ITelaCrud
     {
         if (deveExibirCabecalho)
         {
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine("---------------------------------");
             Console.WriteLine("Visualização de Fornecedores");
             Console.WriteLine("---------------------------------");
@@ -73,5 +73,31 @@ public class TelaFornecedor : TelaBase<Fornecedor>, ITelaOpcoes, ITelaCrud
         }
 
         return false;
+    }
+
+    public void CadastrarFornecedor()
+    {
+        Fornecedor novoFornecedor = ObterDadosCadastrais();
+
+        var erros = novoFornecedor.Validar();
+        if (erros.Count > 0)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            foreach (var erro in erros)
+                Console.WriteLine(erro);
+            Console.ResetColor();
+            return;
+        }
+
+        // está verificando se tem cnpj duplicado
+        if (ExisteRegistroComInformacoesExclusivas(novoFornecedor))
+            return;
+
+        // se passou em todas as validaões, irá salvar
+        repositorio.Cadastrar(novoFornecedor);
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Fornecedor cadastrado com sucesso!");
+        Console.ResetColor();
     }
 }
