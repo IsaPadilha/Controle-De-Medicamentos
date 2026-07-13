@@ -26,7 +26,7 @@ public class Paciente : EntidadeBase
         if (string.IsNullOrWhiteSpace(Nome) || Nome.Length < 3 || Nome.Length > 100)
             erros.Add("O campo \"Nome\" deve conter entre 3 e 100 caracteres.");
 
-        if (!Regex.IsMatch(Telefone, @"^\(\d{2}\) \d{4,5}-\d{4}$"))
+        if (!Regex.IsMatch(Telefone, @"^\(\d{2}\)\s?\d{4,5}-\d{4}$"))
             erros.Add("O campo \"Telefone\" deve estar no formato (DDD) 90000-0000.");
 
         if (string.IsNullOrWhiteSpace(CartaoSus) || CartaoSus.Length != 15)

@@ -25,7 +25,7 @@ public class Fornecedor : EntidadeBase
         if (string.IsNullOrWhiteSpace(Nome) || Nome.Length < 2 || Nome.Length > 100)
             erros.Add("O campo \"Nome\" deve conter entre 2 e 100 caracteres.");
 
-        if (!Regex.IsMatch(Telefone, @"^\(\d{2}\) \d{4,5}-\d{4}$"))
+        if (!Regex.IsMatch(Telefone, @"^\(\d{2}\)\s?\d{4,5}-\d{4}$"))
             erros.Add("O campo \"Telefone\" deve estar no formato (DDD) 90000-0000.");
 
         if (!Regex.IsMatch(Cnpj, @"^\d{2}\.?\d{3}\.?\d{3}\/?\d{4}-?\d{2}$"))
