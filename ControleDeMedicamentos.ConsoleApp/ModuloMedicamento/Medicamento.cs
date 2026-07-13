@@ -42,14 +42,20 @@ public class Medicamento : EntidadeBase
     {
         List<string> erros = [];
 
-        if (string.IsNullOrWhiteSpace(Nome) || Nome.Length < 2 || Nome.Length > 100)
-            erros.Add("O campo \"Nome\" deve conter entre 2 e 100 caracteres.");
+        if (string.IsNullOrWhiteSpace(Nome) || Nome.Length < 3 || Nome.Length > 100)
+            erros.Add("O campo \"Nome\" deve conter entre 3 e 100 caracteres.");
 
         if (string.IsNullOrWhiteSpace(Descricao) || Descricao.Length < 5 || Descricao.Length > 255)
             erros.Add("O campo \"Descrição\" deve conter entre 5 e 255 caracteres.");
 
         if (Fornecedor == null)
             erros.Add("O campo \"Fornecedor\" deve ser preenchido.");
+
+        foreach (var req in Requisicoes)
+        {
+            if (req.Quantidade <= 0)
+                erros.Add("A quantidade da requisição deve ser maior que zero.");
+        }
 
         return erros;
     }

@@ -19,7 +19,7 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaOpcoes, I
     {
         if (deveExibirCabecalho)
         {
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine("---------------------------------");
             Console.WriteLine("Visualização de Requisições de Entrada");
             Console.WriteLine("---------------------------------");
@@ -59,10 +59,21 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaOpcoes, I
 
         Medicamento medicamento = repositorioMedicamento.SelecionarPorId(idMedicamento)!;
 
+        if (medicamento == null)
+        {
+            Console.WriteLine("Medicamento não encontrado.");
+            Console.ReadLine();
+            return null!;
+        }
+
         Console.Write("Digite a quantidade que deseja requisitar: ");
         int quantidade = Convert.ToInt32(Console.ReadLine());
 
-        return new RequisicaoEntrada(medicamento, quantidade);
+        RequisicaoEntrada novaRequisicao = new RequisicaoEntrada(medicamento, quantidade);
+        medicamento.RegistrarRequisicao(novaRequisicao); //atualiza o calculo de estoque
+        repositorioMedicamento.Editar(medicamento.Id, medicamento); //salva o medicamento com a nova requisicao
+
+        return novaRequisicao;
     }
 
     private void VisualizarMedicamentos()
