@@ -1,5 +1,7 @@
+using System.Net.Http.Headers;
 using ControleDeMedicamentos.ConsoleApp.Compartilhado.Arquivos;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedores;
+using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamentos;
 using ControleDeMedicamentos.ConsoleApp.ModuloPacientes;
 using ControleDeMedicamentos.ConsoleApp.ModuloRequisicoes;
@@ -12,6 +14,7 @@ public class TelaPrincipal
     private readonly TelaMedicamento telaMedicamento;
     private readonly TelaRequisicaoEntrada telaRequisicaoEntrada;
     private readonly TelaPaciente telaPaciente;
+    private readonly TelaFuncionario telaFuncionario;
 
     public TelaPrincipal(ContextoJson contexto)
     {
@@ -19,11 +22,13 @@ public class TelaPrincipal
         RepositorioMedicamentoEmArquivo repositorioMedicamento = new RepositorioMedicamentoEmArquivo(contexto);
         RepositorioRequisicaoEntradaEmArquivo repositorioRequisicao = new RepositorioRequisicaoEntradaEmArquivo(contexto);
         RepositorioPacienteEmArquivo repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
+        RepositorioFuncionarioEmArquivos repositorioFuncionario = new RepositorioFuncionarioEmArquivos(contexto);
 
         telaFornecedor = new TelaFornecedor(repositorioFornecedor);
         telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
         telaRequisicaoEntrada = new TelaRequisicaoEntrada(repositorioRequisicao, repositorioMedicamento);
         telaPaciente = new TelaPaciente(repositorioPaciente);
+        telaFuncionario = new TelaFuncionario(repositorioFuncionario);
     }
 
     public ITelaOpcoes? ObterOpcaoMenuPrincipal()
@@ -36,6 +41,7 @@ public class TelaPrincipal
         Console.WriteLine("2 - Gestão de Medicamentos");
         Console.WriteLine("3 - Gestão de Requisições de Entrada");
         Console.WriteLine("4 - Gestão de Pacientes");
+        Console.WriteLine("5 - Gestão de Funcionários");
         Console.WriteLine("S - Sair");
         Console.WriteLine("---------------------------------");
         Console.Write("> ");
@@ -53,6 +59,9 @@ public class TelaPrincipal
 
         if (opcaoMenuPrincipal == "4")
             return telaPaciente;
+
+        if (opcaoMenuPrincipal == "5")
+            return telaFuncionario;
 
         return null;
     }
