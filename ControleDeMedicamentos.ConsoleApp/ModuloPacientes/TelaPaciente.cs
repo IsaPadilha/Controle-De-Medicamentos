@@ -6,9 +6,8 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPacientes;
 public class TelaPaciente : TelaBase<Paciente>, ITelaOpcoes, ITelaCrud
 {
     public TelaPaciente(
-        string nomeEntidade,
         RepositorioBaseEmArquivo<Paciente> repositorio)
-        : base(nomeEntidade, repositorio)
+        : base("Paciente", repositorio)
     {
     }
 
