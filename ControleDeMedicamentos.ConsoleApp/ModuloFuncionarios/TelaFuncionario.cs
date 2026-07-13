@@ -1,6 +1,6 @@
 using System;
 
-namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionarios;
+namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 
 public class TelaFuncionario
 {
