@@ -64,7 +64,7 @@ public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
             Console.WriteLine("Digite ENTER para continuar");
             Console.ReadLine();
 
-            Cadastrar();
+            //Cadastrar();
             return;
         }
 
