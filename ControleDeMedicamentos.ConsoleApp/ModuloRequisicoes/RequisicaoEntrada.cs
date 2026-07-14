@@ -1,5 +1,6 @@
 using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamentos;
+using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloRequisicoes;
 
@@ -7,14 +8,16 @@ public class RequisicaoEntrada : EntidadeBase
 {
     public Medicamento Medicamento { get; set; } = null!;
     public int Quantidade { get; set; }
+    public Funcionario Funcionario { get; set; } = null;
     public DateTime Data { get; set; } = DateTime.Now;
 
     public RequisicaoEntrada() { }
 
-    public RequisicaoEntrada(Medicamento medicamento, int quantidade) : this()
+    public RequisicaoEntrada(Medicamento medicamento, int quantidade, Funcionario funcionario) : this()
     {
         Medicamento = medicamento;
         Quantidade = quantidade;
+        Funcionario = funcionario;
 
         medicamento.RegistrarRequisicao(this);
     }
@@ -29,6 +32,9 @@ public class RequisicaoEntrada : EntidadeBase
         if (Quantidade <= 0)
             erros.Add("A \"Quantidade\" deve ser maior que zero.");
 
+        if (Funcionario == null)
+            erros.Add("O campo \"Funcionário\" deve ser preenchido.");
+
         return erros;
     }
 
@@ -38,5 +44,6 @@ public class RequisicaoEntrada : EntidadeBase
 
         Medicamento = requisicaoAtualizada.Medicamento;
         Quantidade = requisicaoAtualizada.Quantidade;
+        Funcionario = requisicaoAtualizada.Funcionario;
     }
 }

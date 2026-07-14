@@ -26,7 +26,7 @@ public class TelaPrincipal
 
         telaFornecedor = new TelaFornecedor(repositorioFornecedor);
         telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
-        telaRequisicaoEntrada = new TelaRequisicaoEntrada(repositorioRequisicao, repositorioMedicamento);
+        telaRequisicaoEntrada = new TelaRequisicaoEntrada(repositorioRequisicao, repositorioMedicamento, repositorioFuncionario);
         telaPaciente = new TelaPaciente(repositorioPaciente);
         telaFuncionario = new TelaFuncionario(repositorioFuncionario);
     }

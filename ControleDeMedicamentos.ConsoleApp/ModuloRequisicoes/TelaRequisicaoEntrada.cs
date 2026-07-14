@@ -1,21 +1,26 @@
 using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamentos;
+using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
+using ControleDeMedicamentos.ConsoleApp.Compartilhado.Arquivos;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloRequisicoes;
 
 public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaOpcoes, ITelaCrud
 {
     private readonly RepositorioMedicamentoEmArquivo repositorioMedicamento;
+    private readonly RepositorioFuncionarioEmArquivos repositorioFuncionario;
 
     public TelaRequisicaoEntrada(
         RepositorioRequisicaoEntradaEmArquivo repositorioRequisicao,
-        RepositorioMedicamentoEmArquivo repositorioMedicamento
+        RepositorioMedicamentoEmArquivo repositorioMedicamento,
+        RepositorioFuncionarioEmArquivos repositorioFuncionario
     ) : base("Requisição de Entrada", repositorioRequisicao)
     {
         this.repositorioMedicamento = repositorioMedicamento;
+        this.repositorioFuncionario = repositorioFuncionario;
     }
 
-    public override void VisualizarTodos(bool deveExibirCabecalho)
+    public override void VisualizarTodos(bool deveExibirCabecalho = true)
     {
         if (deveExibirCabecalho)
         {
@@ -26,8 +31,8 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaOpcoes, I
         }
 
         Console.WriteLine(
-            "{0, -7} | {1, -20} | {2, -10} | {3, -15}",
-            "Id", "Medicamento", "Qtd", "Data"
+            "{0, -7} | {1, -20} | {2, -10} | {3, -15} | {4, -15}",
+            "Id", "Medicamento", "Qtd", "Funcionario", "Data"
         );
 
         List<RequisicaoEntrada> registros = repositorio.SelecionarTodos();
@@ -35,8 +40,8 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaOpcoes, I
         foreach (RequisicaoEntrada r in registros)
         {
             Console.WriteLine(
-                "{0, -7} | {1, -20} | {2, -10} | {3, -15}",
-                r.Id, r.Medicamento.Nome, r.Quantidade, r.Data.ToShortDateString()
+                "{0, -7} | {1, -20} | {2, -10} | {3, -15} | {4, -15}",
+                r.Id, r.Medicamento.Nome, r.Quantidade, r.Funcionario.Nome, r.Data.ToShortDateString()
             );
         }
 
@@ -66,14 +71,48 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaOpcoes, I
             return null!;
         }
 
+        VisualizarFuncionarios();
+
+        Console.WriteLine("---------------------------------");
+
+        Console.WriteLine("Digite o ID do funcionário que está realizando a entrada: ");
+        int idFuncionario = Convert.ToInt32(Console.ReadLine());
+
+        Funcionario funcionario = repositorioFuncionario.SelecionarPorId(idFuncionario)!;
+
+        if (funcionario == null)
+        {
+            Console.WriteLine("Funcionário não encontrado.");
+            Console.ReadLine();
+            return null!;
+        }
+
         Console.Write("Digite a quantidade que deseja requisitar: ");
         int quantidade = Convert.ToInt32(Console.ReadLine());
 
-        RequisicaoEntrada novaRequisicao = new RequisicaoEntrada(medicamento, quantidade);
+        RequisicaoEntrada novaRequisicao = new RequisicaoEntrada(medicamento, quantidade, funcionario);
         medicamento.RegistrarRequisicao(novaRequisicao); //atualiza o calculo de estoque
         repositorioMedicamento.Editar(medicamento.Id, medicamento); //salva o medicamento com a nova requisicao
 
         return novaRequisicao;
+    }
+
+    private void VisualizarFuncionarios()
+    {
+        Console.WriteLine(
+            "{0, -7} | {1, -20} | {2, -20} | {3, -15}",
+            "Id", "Nome", "Telefone", "CPF"
+        );
+
+        List<Funcionario> registros = repositorioFuncionario.SelecionarTodos();
+
+        foreach (Funcionario f in registros)
+        {
+            Console.WriteLine(
+                "{0, -7} | {1, -20} | {2, -20} | {3, -15}",
+                f.Id, f.Nome, f.Telefone, f.Cpf
+            );
+        }
     }
 
     private void VisualizarMedicamentos()
