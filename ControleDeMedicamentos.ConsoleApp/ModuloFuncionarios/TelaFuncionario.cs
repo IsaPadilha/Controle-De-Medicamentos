@@ -75,30 +75,4 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaOpcoes, ITelaCrud
 
         return false;
     }
-
-    public void CadastrarFuncionarior()
-    {
-        Funcionario novoFuncionario = ObterDadosCadastrais();
-
-        var erros = novoFuncionario.Validar();
-        if (erros.Count > 0)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            foreach (var erro in erros)
-                Console.WriteLine(erro);
-            Console.ResetColor();
-            return;
-        }
-
-        // está verificando se tem cpf duplicado
-        if (ExisteRegistroComInformacoesExclusivas(novoFuncionario))
-            return;
-
-        // se passou em todas as validaões, irá salvar
-        repositorio.Cadastrar(novoFuncionario);
-
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("Funcionário cadastrado com sucesso!");
-        Console.ResetColor();
-    }
 }
