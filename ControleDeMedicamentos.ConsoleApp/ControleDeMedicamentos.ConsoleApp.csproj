@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="ModuloPacientes\" />
+    <Folder Include="ModuloRequisicoes\RequisicaoSaida\" />
   </ItemGroup>
 
 </Project>
