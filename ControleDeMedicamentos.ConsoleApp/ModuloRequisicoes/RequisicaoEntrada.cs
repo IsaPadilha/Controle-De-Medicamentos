@@ -13,7 +13,7 @@ public class RequisicaoEntrada : EntidadeBase
 
     public RequisicaoEntrada() { }
 
-    public RequisicaoEntrada(Medicamento medicamento, int quantidade, Funcionario? funcionario = null) : this()
+    public RequisicaoEntrada(Medicamento medicamento, int quantidade, Funcionario funcionario = null) : this()
     {
         Medicamento = medicamento;
         Quantidade = quantidade;

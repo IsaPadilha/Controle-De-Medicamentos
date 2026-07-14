@@ -2,9 +2,9 @@ using ControleDeMedicamentos.ConsoleApp.Compartilhado.Arquivos;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloRequisicoes.RequisicaoSaida;
 
-public class ModuloRequisicaoSaidaEmArquivo : RepositorioBaseEmArquivo<RequisicaoSaida>
+public class RepositorioRequisicaoSaidaEmArquivo : RepositorioBaseEmArquivo<RequisicaoSaida>
 {
-    public ModuloRequisicaoSaidaEmArquivo(ContextoJson contexto) : base(contexto)
+    public RepositorioRequisicaoSaidaEmArquivo(ContextoJson contexto) : base(contexto)
     {
     }
 

@@ -25,7 +25,18 @@ public class RequisicaoSaida : EntidadeBase
 
     public override List<string> Validar()
     {
-        throw new NotImplementedException();
+        List<string> erros = [];
+
+        if (Medicamento == null)
+            erros.Add("O campo \"Medicamento\" deve ser preenchido.");
+
+        if (Quantidade <= 0)
+            erros.Add("A \"Quantidade\" deve ser maior que zero.");
+
+        if (Paciente == null)
+            erros.Add("O campo \"Paciente\" deve ser preenchido.");
+
+        return erros;
     }
 
     public override void Atualizar(EntidadeBase entidadeAtualizada)

@@ -5,6 +5,7 @@ using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamentos;
 using ControleDeMedicamentos.ConsoleApp.ModuloPacientes;
 using ControleDeMedicamentos.ConsoleApp.ModuloRequisicoes;
+using ControleDeMedicamentos.ConsoleApp.ModuloRequisicoes.RequisicaoSaida;
 
 namespace ControleDeMedicamentos.ConsoleApp.Compartilhado;
 
@@ -13,6 +14,7 @@ public class TelaPrincipal
     private readonly TelaFornecedor telaFornecedor;
     private readonly TelaMedicamento telaMedicamento;
     private readonly TelaRequisicaoEntrada telaRequisicaoEntrada;
+    private readonly TelaRequisicaoSaida telaRequisicaoSaida;
     private readonly TelaPaciente telaPaciente;
     private readonly TelaFuncionario telaFuncionario;
 
@@ -20,13 +22,15 @@ public class TelaPrincipal
     {
         RepositorioFornecedorEmArquivo repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
         RepositorioMedicamentoEmArquivo repositorioMedicamento = new RepositorioMedicamentoEmArquivo(contexto);
-        RepositorioRequisicaoEntradaEmArquivo repositorioRequisicao = new RepositorioRequisicaoEntradaEmArquivo(contexto);
+        RepositorioRequisicaoEntradaEmArquivo repositorioRequisicaoEntrada = new RepositorioRequisicaoEntradaEmArquivo(contexto);
+        RepositorioRequisicaoSaidaEmArquivo repositorioRequisicaoSaida = new RepositorioRequisicaoSaidaEmArquivo(contexto);
         RepositorioPacienteEmArquivo repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
         RepositorioFuncionarioEmArquivos repositorioFuncionario = new RepositorioFuncionarioEmArquivos(contexto);
 
         telaFornecedor = new TelaFornecedor(repositorioFornecedor);
         telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
-        telaRequisicaoEntrada = new TelaRequisicaoEntrada(repositorioRequisicao, repositorioMedicamento, repositorioFuncionario);
+        telaRequisicaoEntrada = new TelaRequisicaoEntrada(repositorioRequisicaoEntrada, repositorioMedicamento, repositorioFuncionario);
+        telaRequisicaoSaida = new TelaRequisicaoSaida(repositorioRequisicaoSaida, repositorioMedicamento, repositorioPaciente);
         telaPaciente = new TelaPaciente(repositorioPaciente);
         telaFuncionario = new TelaFuncionario(repositorioFuncionario);
     }
@@ -40,8 +44,9 @@ public class TelaPrincipal
         Console.WriteLine("1 - Gestão de Fornecedores");
         Console.WriteLine("2 - Gestão de Medicamentos");
         Console.WriteLine("3 - Gestão de Requisições de Entrada");
-        Console.WriteLine("4 - Gestão de Pacientes");
-        Console.WriteLine("5 - Gestão de Funcionários");
+        Console.WriteLine("4 - Gestão de Requisições de Saída");
+        Console.WriteLine("5 - Gestão de Pacientes");
+        Console.WriteLine("6 - Gestão de Funcionários");
         Console.WriteLine("S - Sair");
         Console.WriteLine("---------------------------------");
         Console.Write("> ");
@@ -58,9 +63,12 @@ public class TelaPrincipal
             return telaRequisicaoEntrada;
 
         if (opcaoMenuPrincipal == "4")
-            return telaPaciente;
+            return telaRequisicaoSaida;
 
         if (opcaoMenuPrincipal == "5")
+            return telaPaciente;
+
+        if (opcaoMenuPrincipal == "6")
             return telaFuncionario;
 
         return null;
