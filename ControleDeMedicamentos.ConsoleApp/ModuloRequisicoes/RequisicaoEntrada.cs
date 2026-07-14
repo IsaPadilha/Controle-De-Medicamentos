@@ -8,12 +8,12 @@ public class RequisicaoEntrada : EntidadeBase
 {
     public Medicamento Medicamento { get; set; } = null!;
     public int Quantidade { get; set; }
-    public Funcionario Funcionario { get; set; } = null;
+    public Funcionario Funcionario { get; set; } = null!;
     public DateTime Data { get; set; } = DateTime.Now;
 
     public RequisicaoEntrada() { }
 
-    public RequisicaoEntrada(Medicamento medicamento, int quantidade, Funcionario funcionario) : this()
+    public RequisicaoEntrada(Medicamento medicamento, int quantidade, Funcionario? funcionario = null) : this()
     {
         Medicamento = medicamento;
         Quantidade = quantidade;

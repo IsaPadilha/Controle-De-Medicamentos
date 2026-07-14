@@ -1,6 +1,7 @@
 using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedores;
 using ControleDeMedicamentos.ConsoleApp.ModuloRequisicoes;
+using ControleDeMedicamentos.ConsoleApp.ModuloRequisicoes.RequisicaoSaida;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamentos;
 
@@ -10,6 +11,7 @@ public class Medicamento : EntidadeBase
     public string Descricao { get; set; } = string.Empty;
     public Fornecedor Fornecedor { get; set; } = null!;
     public List<RequisicaoEntrada> Requisicoes { get; set; } = [];
+    public List<RequisicaoSaida> Saidas { get; set; } = [];
 
     public Medicamento() { }
 
@@ -29,6 +31,9 @@ public class Medicamento : EntidadeBase
             foreach (RequisicaoEntrada req in Requisicoes)
                 total += req.Quantidade;
 
+            foreach (RequisicaoSaida saida in Saidas)
+                total -= saida.Quantidade;
+
             return total;
         }
     }
@@ -36,6 +41,11 @@ public class Medicamento : EntidadeBase
     public void RegistrarRequisicao(RequisicaoEntrada requisicao)
     {
         Requisicoes.Add(requisicao);
+    }
+
+    public void RegistrarSaida(RequisicaoSaida requisicao)
+    {
+        Saidas.Add(requisicao);
     }
 
     public override List<string> Validar()

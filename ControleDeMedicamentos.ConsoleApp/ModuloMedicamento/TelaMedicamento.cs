@@ -1,5 +1,6 @@
 using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedores;
+using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloRequisicoes;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamentos;
