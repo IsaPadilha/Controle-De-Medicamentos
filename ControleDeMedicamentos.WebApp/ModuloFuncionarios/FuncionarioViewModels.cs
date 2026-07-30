@@ -17,3 +17,8 @@ public record EditarFuncionarioViewModel(
     string Telefone,
     string Cpf
 );
+
+public record ExcluirFuncionarioViewModel(
+    int Id,
+    string Nome
+);
