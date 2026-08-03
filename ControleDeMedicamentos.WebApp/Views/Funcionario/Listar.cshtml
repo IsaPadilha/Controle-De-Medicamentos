@@ -1,16 +1,9 @@
 @model List<ListarFuncionarioViewModel>
 
-<h2>Controle de Medicamentos</h2>
-
-<hr />
-<a href="/">Início</a> / @* Âncora ou Link *@
-<a href="/Fornecedor/Listar">Fornecedores</a> / @* Âncora ou Link *@
-<a href="/Medicamento/Listar">Medicamentos</a> / @* Âncora ou Link *@
-<a href="/Funcionario/Listar">Funcionários</a> / @* Âncora ou Link *@
-<hr />
-
-<h1>Listagem de Funcionários</h1>
-
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Listagem de Funcionário";
+}
 <p>
     <a href="Cadastrar">Cadastrar funcionário</a>
 </p>

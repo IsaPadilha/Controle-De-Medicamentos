@@ -1,23 +1,18 @@
 @model Fornecedor;
 
-<h2>Controle de Medicamentos
-    <h2 />
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Exclusão de Fornecedor";
+}
 
-    <hr />
-    <a href="/">Início</a> @* Ancora ou link*@
-    <a href="/Fornecedor/Listar">Fornecedores</a>
-    <hr />
-
-    <h1>Exclusão de Fornecedor</h1>
-
-    <form action="/Fornecedor/Excluir/@Model.Id" method="post">
-        <p>
-            Você deseja realmente excluir o registro "@Model.Nome"? Esta ação é irreversível.
-        </p>
-
-        <button type="submit">Confirmar</button>
-    </form>
-
+<form action="/Fornecedor/Excluir/@Model.Id" method="post">
     <p>
-        <a href="/Fornecedor/Listar">Voltar para a lista</a>
+        Você deseja realmente excluir o registro "@Model.Nome"? Esta ação é irreversível.
     </p>
+
+    <button type="submit">Confirmar</button>
+</form>
+
+<p>
+    <a href="/Fornecedor/Listar">Voltar para a lista</a>
+</p>
