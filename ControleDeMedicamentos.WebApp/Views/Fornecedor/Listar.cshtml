@@ -7,8 +7,16 @@
 
 <p>
     <a class="btn btn-primary" href="Cadastrar">Cadastrar fornecedor</a>
-    <p />
+<p/>
 
+@if (Model.Count == 0)
+{
+    <div class="alert alert-warning mt-4" role="alert">
+        Não há nenhum fornecedor registrado.
+    </div>
+}
+else
+{
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -36,3 +44,4 @@
             }
         </tbody>
     </table>
+}
