@@ -1,4 +1,4 @@
-@model List<Fornecedor>
+@model List<ListarFornecedorViewModel>
 
 @{
     Layout = "_Layout";
@@ -29,7 +29,7 @@ else
         </thead>
 
         <tbody>
-            @foreach (Fornecedor f in Model)
+            @foreach (ListarFornecedorViewModel f in Model)
             {
                 <tr>
                     <td>@f.Id</td>

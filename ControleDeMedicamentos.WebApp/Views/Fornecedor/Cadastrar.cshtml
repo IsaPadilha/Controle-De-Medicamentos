@@ -1,24 +1,26 @@
+@model CadastrarFornecedorViewModel
+
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Cadastro de Fornecedor";
 }
 
 <div class="row justify-content-start">
-    <form class="col-6" action="/Fornecedor/Cadastrar" method="post">
+    <form class="col-6" asp-action="Cadastrar" method="post">
 
         <div>
-            <label class="form-label" for="nome">Nome</label>
-            <input class="form-control" id="nome" name="nome" type="text">
+            <label class="form-label" asp-for="Nome"></label>
+            <input class="form-control" asp-for="Nome" type="text">
         </div>
 
         <div class="mt-4">
-            <label class="form-label" for="telefone">Telefone</label>
-            <input class="form-control" id="telefone" name="telefone" type="text">
+            <label class="form-label" asp-for="Telefone"></label>
+            <input class="form-control" asp-for="Telefone" type="text">
         </div>
 
         <div class="mt-4">
-            <label class="form-label" for="cnpj">CNPJ</label>
-            <input class="form-control" id="cnpj" name="cnpj" type="text">
+            <label class="form-label" asp-for="Cnpj">CNPJ</label>
+            <input class="form-control" asp-for="Cnpj" type="text">
         </div>
 
         <div class="d-flex gap-3 mt-4">

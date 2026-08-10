@@ -1,4 +1,4 @@
-@model Fornecedor;
+@model ExcluirFornecedorViewModel
 
 @{
     Layout = "_Layout";
@@ -6,7 +6,7 @@
 }
 
 <div class="row justify-content-start">
-    <form class="col-8" action="/Fornecedor/Excluir/@Model.Id" method="post">
+    <form class="col-8" asp-action="Excluir" asp-route-id="@Model.Id" method="post">
         <div class="alert alert-danger mt-4" role="alert">
             Você deseja realmente excluir o registro "@Model.Nome"? Esta ação é irreversível.
         </div>
