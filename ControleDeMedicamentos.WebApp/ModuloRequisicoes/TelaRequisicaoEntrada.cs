@@ -20,6 +20,11 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaOpcoes, I
         this.repositorioFuncionario = repositorioFuncionario;
     }
 
+    protected override bool ExistemDependenciasAtivasDoRegistro(int idRegistro)
+    {
+        return false;
+    }
+
     public override void VisualizarTodos(bool deveExibirCabecalho = true)
     {
         if (deveExibirCabecalho)
@@ -71,6 +76,11 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaOpcoes, I
             return null!;
         }
 
+        Console.WriteLine("---------------------------------");
+
+        Console.Write("Digite a quantidade do medicamento que deseja requisitar: ");
+        int quantidade = Convert.ToInt32(Console.ReadLine());
+
         VisualizarFuncionarios();
 
         Console.WriteLine("---------------------------------");
@@ -87,8 +97,7 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaOpcoes, I
             return null!;
         }
 
-        Console.Write("Digite a quantidade que deseja requisitar: ");
-        int quantidade = Convert.ToInt32(Console.ReadLine());
+        return new RequisicaoEntrada(medicamento, quantidade, funcionario);
 
         RequisicaoEntrada novaRequisicao = new RequisicaoEntrada(medicamento, quantidade, funcionario);
         medicamento.RegistrarRequisicao(novaRequisicao); //atualiza o calculo de estoque
@@ -133,8 +142,21 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaOpcoes, I
         }
     }
 
-    protected override bool ExistemDependenciasAtivasDoRegistro(int idRegistro)
+    private void VisualizarFuncionario()
     {
-        return false;
+        Console.WriteLine(
+            "{0, -7} | {1, -30} | {2, -15} | {3, -14}",
+            "Id", "Nome", "Telefone", "CPF"
+        );
+
+        List<Funcionario> registros = repositorioFuncionario.SelecionarTodos();
+
+        foreach (Funcionario f in registros)
+        {
+            Console.WriteLine(
+                "{0, -7} | {1, -30} | {2, -15} | {3, -14}",
+                f.Id, f.Nome, f.Telefone, f.Cpf
+            );
+        }
     }
 }
