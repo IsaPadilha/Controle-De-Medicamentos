@@ -1,6 +1,3 @@
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-
 namespace ControleDeMedicamentos.WebApp.ModuloFuncionario;
 
 public record ListarFuncionarioViewModel(int Id, string Nome, string Telefone);
