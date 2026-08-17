@@ -1,7 +1,5 @@
 using ControleDeMedicamentos.WebApp.Compartilhado;
 using ControleDeMedicamentos.WebApp.ModuloFornecedores;
-using ControleDeMedicamentos.WebApp.ModuloFuncionario;
-using ControleDeMedicamentos.WebApp.ModuloRequisicoes;
 
 namespace ControleDeMedicamentos.WebApp.ModuloMedicamentos;
 
@@ -112,25 +110,11 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaOpcoes, ITelaCrud
             if (m.Id != idIgnorado && m.Nome.Equals(entidade.Nome, StringComparison.OrdinalIgnoreCase))
             {
                 Console.WriteLine("---------------------------------");
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Esse medicamento já existe, o estoque será atualizado.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Já existe um medicamento cadastrado com este nome.");
                 Console.ResetColor();
                 Console.WriteLine("---------------------------------");
-
-                Console.Write("Digite a quantidade para adicionar ao estoque: ");
-                int quantidade = Convert.ToInt32(Console.ReadLine());
-
-                RequisicaoEntrada requisicao = new RequisicaoEntrada(m, quantidade);
-                m.RegistrarRequisicao(requisicao);
-
-                repositorio.Editar(m.Id, m);
-
-                Console.WriteLine("---------------------------------");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Estoque atualizado com sucesso!");
-                Console.ResetColor();
-
-                return true; //foi atualizada
+                return true;
             }
         }
 

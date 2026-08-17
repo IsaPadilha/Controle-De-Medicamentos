@@ -11,14 +11,15 @@ public class RequisicaoEntradaController : Controller
     private readonly RepositorioMedicamentoEmArquivo repositorioMedicamento;
     private readonly RepositorioFuncionarioEmArquivos repositorioFuncionario;
 
-    public RequisicaoEntradaController()
+    public RequisicaoEntradaController(
+        RepositorioRequisicaoEntradaEmArquivo repositorio,
+        RepositorioMedicamentoEmArquivo repositorioMedicamento,
+        RepositorioFuncionarioEmArquivos repositorioFuncionario
+    )
     {
-        ContextoJson contexto = new ContextoJson();
-        contexto.Carregar();
-
-        repositorio = new RepositorioRequisicaoEntradaEmArquivo(contexto);
-        repositorioMedicamento = new RepositorioMedicamentoEmArquivo(contexto);
-        repositorioFuncionario = new RepositorioFuncionarioEmArquivos(contexto);
+        this.repositorio = repositorio;
+        this.repositorioMedicamento = repositorioMedicamento;
+        this.repositorioFuncionario = repositorioFuncionario;
     }
 
     [HttpGet]

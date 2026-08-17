@@ -97,8 +97,6 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaOpcoes, I
             return null!;
         }
 
-        return new RequisicaoEntrada(medicamento, quantidade, funcionario);
-
         RequisicaoEntrada novaRequisicao = new RequisicaoEntrada(medicamento, quantidade, funcionario);
         medicamento.RegistrarRequisicao(novaRequisicao); //atualiza o calculo de estoque
         repositorioMedicamento.Editar(medicamento.Id, medicamento); //salva o medicamento com a nova requisicao

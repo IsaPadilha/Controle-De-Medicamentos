@@ -11,7 +11,11 @@ public class RequisicaoSaidaController : Controller
     private readonly RepositorioPacienteEmArquivo repositorioPaciente;
     private readonly RepositorioMedicamentoEmArquivo repositorioMedicamento;
 
-    public RequisicaoSaidaController()
+    public RequisicaoSaidaController(
+        RepositorioRequisicaoSaidaEmArquivo repositorio,
+        RepositorioPacienteEmArquivo repositorioPaciente,
+        RepositorioMedicamentoEmArquivo repositorioMedicamento
+    )
     {
         ContextoJson contexto = new ContextoJson();
         contexto.Carregar();
