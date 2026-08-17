@@ -14,10 +14,15 @@ using ControleDeMedicamentos.WebApp.ModuloRequisicoes.RequisicaoSaida;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Adiciona e injeta uma instância por requisição/conexão
-// Func<IServiceProvider, ContextoJson> implementationFactory
+builder.Services.AddScoped(_ =>
+{
+    ContextoJson contexto = new ContextoJson();
 
-builder.Services.AddScoped<ContextoJson>(ContextoJson.InjetarContexto);
+    contexto.Carregar();
+
+    return contexto;
+});
+
 builder.Services.AddScoped<RepositorioMedicamentoEmArquivo>();
 builder.Services.AddScoped<RepositorioFornecedorEmArquivo>();
 builder.Services.AddScoped<RepositorioFuncionarioEmArquivos>();
