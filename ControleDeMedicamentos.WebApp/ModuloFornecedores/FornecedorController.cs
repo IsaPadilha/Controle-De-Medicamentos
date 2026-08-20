@@ -49,15 +49,18 @@ public sealed class FornecedorController : Controller
             cadastrarVm.Cnpj ?? string.Empty
         );
 
-        List<string> erros = fornecedor.Validar();
+        //List<string> erros = fornecedor.Validar();
 
-        if (erros.Count > 0)
-        {
-            foreach (string erro in erros)
-                ModelState.AddModelError(string.Empty, erro);
+        //if (erros.Count > 0)
+        //{
+        //    foreach (string erro in erros)
+        //        ModelState.AddModelError(string.Empty, erro);
 
+        //    return View(cadastrarVm);
+        //}
+
+        if (!ModelState.IsValid)
             return View(cadastrarVm);
-        }
 
         repositorio.Cadastrar(fornecedor);
 
@@ -67,7 +70,7 @@ public sealed class FornecedorController : Controller
     [HttpGet]
     public ActionResult Editar(int id)
     {
-        Fornecedor? fornecedorSelecionado = repositorio.SelecionarPorId(id);
+        Fornecedor fornecedorSelecionado = repositorio.SelecionarPorId(id);
 
         if (fornecedorSelecionado == null)
             return NotFound();
@@ -90,6 +93,9 @@ public sealed class FornecedorController : Controller
             editarVm.Telefone,
             editarVm.Cnpj
         );
+
+        if (!ModelState.IsValid)
+            return View(editarVm);
 
         bool conseguiuEditar = repositorio.Editar(editarVm.Id, fornecedorAtualizado);
 
