@@ -44,10 +44,20 @@ public sealed class FornecedorController : Controller
     public ActionResult Cadastrar(CadastrarFornecedorViewModel cadastrarVm)
     {
         Fornecedor fornecedor = new Fornecedor(
-            cadastrarVm.Nome,
-            cadastrarVm.Telefone,
-            cadastrarVm.Cnpj
+            cadastrarVm.Nome ?? string.Empty,
+            cadastrarVm.Telefone ?? string.Empty,
+            cadastrarVm.Cnpj ?? string.Empty
         );
+
+        List<string> erros = fornecedor.Validar();
+
+        if (erros.Count > 0)
+        {
+            foreach (string erro in erros)
+                ModelState.AddModelError(string.Empty, erro);
+
+            return View(cadastrarVm);
+        }
 
         repositorio.Cadastrar(fornecedor);
 
