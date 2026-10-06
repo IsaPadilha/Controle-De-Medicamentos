@@ -6,7 +6,7 @@ public record ListarFornecedorViewModel(int Id, string Nome, string Telefone, st
 
 public record CadastrarFornecedorViewModel(
     [Required(ErrorMessage = "O campo \"Nome\" é obrigatório.")]
-    [StringLength(100, MinimumLength = 2, ErrorMessage = "O campo \"Nome\" deve conter entre 2 e 100 caracteres.")]
+    [StringLength(100, MinimumLength = 3, ErrorMessage = "O campo \"Nome\" deve conter entre 3 e 100 caracteres.")]
     string Nome,
 
     [Required(ErrorMessage = "O campo \"Telefone\" é obrigatório.")]

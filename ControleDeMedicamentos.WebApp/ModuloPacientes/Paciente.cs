@@ -32,8 +32,7 @@ public class Paciente : EntidadeBase
         if (string.IsNullOrWhiteSpace(CartaoSus) || CartaoSus.Length != 15)
             erros.Add("O campo \"CartaoSus\" deve conter 15 dígitos.");
 
-        if (string.IsNullOrWhiteSpace(Cpf) || Cpf.Length != 11)
-            erros.Add("O campo \"Cpf\" deve conter 11 dígitos");
+        
 
         return erros;
     }
