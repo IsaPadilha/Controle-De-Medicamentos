@@ -1,4 +1,5 @@
 using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Dominio;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Infraestrutura;
 
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,7 @@ namespace ControleDeMedicamentos.WebApp.Compartilhado.Infraestrutura.Orm;
 public sealed class ControleDeMedicamentosDbContext : DbContext
 {
     public DbSet<Fornecedor> Fornecedores => Set<Fornecedor>();
-    // public DbSet<Funcionario> Funcionarios => Set<Funcionario>();
+    public DbSet<Funcionario> Funcionarios => Set<Funcionario>();
     // public DbSet<Medicamento> Medicamentos => Set<Medicamento>();
     // public DbSet<Paciente> Pacientes => Set<Paciente>();
     // public DbSet<Requisicao> Requisicoes => Set<Requisicao>();
