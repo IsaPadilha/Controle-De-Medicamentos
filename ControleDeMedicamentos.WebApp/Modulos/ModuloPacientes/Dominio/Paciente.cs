@@ -1,9 +1,9 @@
 using ControleDeMedicamentos.WebApp.Compartilhado;
 using System.Text.RegularExpressions;
 
-namespace ControleDeMedicamentos.WebApp.ModuloPacientes;
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Dominio;
 
-public class Paciente : EntidadeBase
+public class Paciente : EntidadeBase<Paciente>
 {
     public string Nome { get; set; } = string.Empty;
     public string Telefone { get; set; } = string.Empty;
@@ -32,18 +32,15 @@ public class Paciente : EntidadeBase
         if (string.IsNullOrWhiteSpace(CartaoSus) || CartaoSus.Length != 15)
             erros.Add("O campo \"CartaoSus\" deve conter 15 dígitos.");
 
-        
+
 
         return erros;
     }
-
-    public override void Atualizar(EntidadeBase entidadeAtualizada)
+    public override void Atualizar(Paciente entidadeAtualizada)
     {
-        Paciente pacienteAtualizado = (Paciente)entidadeAtualizada;
-
-        Nome = pacienteAtualizado.Nome;
-        Telefone = pacienteAtualizado.Telefone;
-        CartaoSus = pacienteAtualizado.CartaoSus;
-        Cpf = pacienteAtualizado.Cpf;
+        Nome = entidadeAtualizada.Nome;
+        Telefone = entidadeAtualizada.Telefone;
+        CartaoSus = entidadeAtualizada.CartaoSus;
+        Cpf = entidadeAtualizada.Cpf;
     }
 }
