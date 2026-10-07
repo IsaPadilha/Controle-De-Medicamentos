@@ -1,4 +1,5 @@
-using ControleDeMedicamentos.WebApp.Compartilhado;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Dominio;
+
 using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
 
 namespace ControleDeMedicamentos.WebApp.ModuloMedicamentos;
