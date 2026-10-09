@@ -1,4 +1,4 @@
-using ControleDeMedicamentos.WebApp.Compartilhado.Dominio;
+using ControleDeMedicamentos.WebApp.Compartilhado;
 
 namespace ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Dominio
 {

@@ -1,17 +1,17 @@
-using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Dominio;
 
-namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Infra
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Infraestrutura
 {
-    public class RepositorioFuncionarioEmArquivo
+    public class RepositorioRequisicaoEntradaEmArquivo
     {
-        private readonly List<Funcionario> registros = new();
+        private readonly List<RequisicaoEntrada> registros = new();
 
-        public void Inserir(Funcionario entidade)
+        public void Inserir(RequisicaoEntrada entidade)
         {
             registros.Add(entidade);
         }
 
-        public void Editar(Guid id, Funcionario entidadeAtualizada)
+        public void Editar(Guid id, RequisicaoEntrada entidadeAtualizada)
         {
             var existente = registros.FirstOrDefault(r => r.Id == id);
             if (existente != null)
@@ -25,12 +25,12 @@ namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Infra
                 registros.Remove(existente);
         }
 
-        public List<Funcionario> SelecionarTodos()
+        public List<RequisicaoEntrada> SelecionarTodos()
         {
             return registros;
         }
 
-        public Funcionario? SelecionarPorId(Guid id)
+        public RequisicaoEntrada? SelecionarPorId(Guid id)
         {
             return registros.FirstOrDefault(r => r.Id == id);
         }

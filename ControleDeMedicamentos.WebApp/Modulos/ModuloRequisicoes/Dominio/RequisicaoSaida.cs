@@ -1,10 +1,10 @@
 using ControleDeMedicamentos.WebApp.Compartilhado;
-using ControleDeMedicamentos.WebApp.ModuloMedicamentos;
-using ControleDeMedicamentos.WebApp.ModuloPacientes;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Dominio;
 
-namespace ControleDeMedicamentos.WebApp.ModuloRequisicoes.RequisicaoSaida;
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Dominio;
 
-public class RequisicaoSaida : EntidadeBase
+public class RequisicaoSaida : EntidadeBase<RequisicaoSaida>
 {
     public List<MedicamentoPrescrito> MedicamentoPrescritos { get; set; } = [];
     public Paciente Paciente { get; set; } = null!;
@@ -14,27 +14,26 @@ public class RequisicaoSaida : EntidadeBase
 
     public RequisicaoSaida(Paciente paciente, List<MedicamentoPrescrito> medicamentoPrescritos) : this()
     {
-        MedicamentoPrescritos = MedicamentoPrescritos;
+        MedicamentoPrescritos = medicamentoPrescritos;
         Paciente = paciente;
 
-        foreach (MedicamentoPrescrito mp in MedicamentoPrescritos)
+        foreach (var mp in MedicamentoPrescritos)
             mp.Medicamento.RegistrarSaida(this);
     }
 
     public int ObterQuantidade(Medicamento medicamento)
     {
-        foreach (MedicamentoPrescrito mp in MedicamentoPrescritos)
+        foreach (var mp in MedicamentoPrescritos)
         {
             if (mp.Medicamento.Id == medicamento.Id)
                 return mp.Quantidade;
         }
-
         return 0;
     }
 
     public override List<string> Validar()
     {
-        List<string> erros = [];
+        var erros = new List<string>();
 
         if (MedicamentoPrescritos.Count == 0)
             erros.Add("É necessário selecionar ao menos um medicamento.");
@@ -42,12 +41,10 @@ public class RequisicaoSaida : EntidadeBase
         if (Paciente == null)
             erros.Add("O campo \"Paciente\" deve ser preenchido.");
 
-        foreach (MedicamentoPrescrito mp in MedicamentoPrescritos)
+        foreach (var mp in MedicamentoPrescritos)
         {
             if (mp.Medicamento == null)
-            {
                 erros.Add("O campo \"Medicamento\" deve ser preenchido.");
-            }
             else
             {
                 if (mp.Quantidade <= 0)
@@ -57,14 +54,13 @@ public class RequisicaoSaida : EntidadeBase
                     erros.Add($"Não há estoque suficiente para o medicamento \"{mp.Medicamento.Nome}\".");
             }
         }
+
         return erros;
     }
 
-    public override void Atualizar(EntidadeBase entidadeAtualizada)
+    public override void Atualizar(RequisicaoSaida entidadeAtualizada)
     {
-        RequisicaoSaida requisicaoAtualizada = (RequisicaoSaida)entidadeAtualizada;
-
-        Paciente = requisicaoAtualizada.Paciente;
-        MedicamentoPrescritos = requisicaoAtualizada.MedicamentoPrescritos;
+        Paciente = entidadeAtualizada.Paciente;
+        MedicamentoPrescritos = entidadeAtualizada.MedicamentoPrescritos;
     }
 }

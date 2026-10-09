@@ -1,5 +1,7 @@
-using ControleDeMedicamentos.WebApp.Compartilhado.Infraestrutura.Orm;
+using ControleDeMedicamentos.WebApp.Compartilhado;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Dominio;
+using ControleDeMedicamentos.WebApp.Compartilhado.Infraestrutura.Orm;
+using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Infraestrutura
 {
@@ -20,29 +22,25 @@ namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Infraestrutura
 
         public bool Editar(Guid idSelecionado, Funcionario entidadeAtualizada)
         {
-            Funcionario? funcionarioSelecionado = SelecionarPorId(idSelecionado);
+            var funcionarioSelecionado = SelecionarPorId(idSelecionado);
 
             if (funcionarioSelecionado == null)
                 return false;
 
             funcionarioSelecionado.Atualizar(entidadeAtualizada);
-
             dbContext.SaveChanges();
-
             return true;
         }
 
         public bool Excluir(Guid idSelecionado)
         {
-            Funcionario? funcionarioSelecionado = SelecionarPorId(idSelecionado);
+            var funcionarioSelecionado = SelecionarPorId(idSelecionado);
 
             if (funcionarioSelecionado == null)
                 return false;
 
             dbContext.Funcionarios.Remove(funcionarioSelecionado);
-
             dbContext.SaveChanges();
-
             return true;
         }
 

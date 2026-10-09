@@ -1,5 +1,6 @@
-using ControleDeMedicamentos.WebApp.Compartilhado.Infraestrutura.Orm;
+using ControleDeMedicamentos.WebApp.Compartilhado;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Dominio;
+using ControleDeMedicamentos.WebApp.Compartilhado.Infraestrutura.Orm;
 
 namespace ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Infraestrutura
 {
@@ -12,38 +13,32 @@ namespace ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Infraestrutura
             this.dbContext = dbContext;
         }
 
-        public void Cadastrar(Paciente entidade)
+        public void Inserir(Paciente entidade)
         {
             dbContext.Pacientes.Add(entidade);
             dbContext.SaveChanges();
         }
 
-        public bool Editar(Guid idSelecionado, Paciente entidadeAtualizada)
+        public void Editar(Guid idSelecionado, Paciente entidadeAtualizada)
         {
-            Paciente? pacienteSelecionado = SelecionarPorId(idSelecionado);
+            var pacienteSelecionado = SelecionarPorId(idSelecionado);
 
             if (pacienteSelecionado == null)
-                return false;
+                return;
 
             pacienteSelecionado.Atualizar(entidadeAtualizada);
-
             dbContext.SaveChanges();
-
-            return true;
         }
 
-        public bool Excluir(Guid idSelecionado)
+        public void Excluir(Guid idSelecionado)
         {
-            Paciente? pacienteSelecionado = SelecionarPorId(idSelecionado);
+            var pacienteSelecionado = SelecionarPorId(idSelecionado);
 
             if (pacienteSelecionado == null)
-                return false;
+                return;
 
             dbContext.Pacientes.Remove(pacienteSelecionado);
-
             dbContext.SaveChanges();
-
-            return true;
         }
 
         public Paciente? SelecionarPorId(Guid idSelecionado)

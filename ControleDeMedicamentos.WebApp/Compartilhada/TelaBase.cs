@@ -1,13 +1,12 @@
 using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
-
 namespace ControleDeMedicamentos.WebApp.Compartilhado;
 
-public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
+public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase<TEntidade>
 {
     private readonly string nomeEntidade = string.Empty;
-    protected readonly RepositorioBaseEmArquivo<TEntidade> repositorio;
+    protected readonly IRepositorio<TEntidade> repositorio;
 
-    protected TelaBase(string nomeEntidade, RepositorioBaseEmArquivo<TEntidade> repositorio)
+    protected TelaBase(string nomeEntidade, IRepositorio<TEntidade> repositorio)
     {
         this.nomeEntidade = nomeEntidade;
         this.repositorio = repositorio;
@@ -88,7 +87,7 @@ public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
         Console.WriteLine("---------------------------------");
 
         Console.Write("Digite o ID do registro que deseja editar: ");
-        int idSelecionado = Convert.ToInt32(Console.ReadLine());
+        Guid idSelecionado = Guid.Parse(Console.ReadLine()!);
 
         Console.WriteLine("---------------------------------");
 
@@ -143,7 +142,7 @@ public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
         Console.WriteLine("---------------------------------");
 
         Console.Write("Digite o ID do registro que deseja excluir: ");
-        int idSelecionado = Convert.ToInt32(Console.ReadLine());
+        Guid idSelecionado = Guid.Parse(Console.ReadLine()!);
 
         if (ExistemDependenciasAtivasDoRegistro(idSelecionado))
         {
@@ -165,12 +164,12 @@ public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
 
     protected abstract TEntidade ObterDadosCadastrais();
 
-    protected virtual bool ExisteRegistroComInformacoesExclusivas(TEntidade entidade, int? idIgnorado = null)
+    protected virtual bool ExisteRegistroComInformacoesExclusivas(TEntidade entidade, Guid? idIgnorado = null)
     {
         return false;
     }
 
-    protected virtual bool ExistemDependenciasAtivasDoRegistro(int idRegistro)
+    protected virtual bool ExistemDependenciasAtivasDoRegistro(Guid idRegistro)
     {
         return false;
     }

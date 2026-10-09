@@ -1,7 +1,6 @@
 using ControleDeMedicamentos.WebApp.Compartilhado;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Dominio;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Dominio;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.RequisicaoSaida;
 
 namespace ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Dominio
 {
@@ -11,7 +10,7 @@ namespace ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Dominio
         public string Descricao { get; set; } = string.Empty;
         public Fornecedor Fornecedor { get; set; } = null!;
         public List<RequisicaoEntrada> Requisicoes { get; set; } = new();
-        public List<RequisicaoSaida> Saidas { get; set; } = new();
+        public List<RequisicaoSaida> Saidas { get; set; } = [];
 
         public Medicamento() { }
 

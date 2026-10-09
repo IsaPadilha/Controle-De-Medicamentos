@@ -1,10 +1,11 @@
 using ControleDeMedicamentos.WebApp.Compartilhado;
-using ControleDeMedicamentos.WebApp.ModuloMedicamentos;
-using ControleDeMedicamentos.WebApp.ModuloFuncionario;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Dominio;
 
-namespace ControleDeMedicamentos.WebApp.ModuloRequisicoes;
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Dominio;
 
-public class RequisicaoEntrada : EntidadeBase
+public class RequisicaoEntrada : EntidadeBase<RequisicaoEntrada>
 {
     public Medicamento Medicamento { get; set; } = null!;
     public int Quantidade { get; set; }
@@ -24,7 +25,7 @@ public class RequisicaoEntrada : EntidadeBase
 
     public override List<string> Validar()
     {
-        List<string> erros = [];
+        var erros = new List<string>();
 
         if (Medicamento == null)
             erros.Add("O campo \"Medicamento\" deve ser preenchido.");
@@ -38,12 +39,11 @@ public class RequisicaoEntrada : EntidadeBase
         return erros;
     }
 
-    public override void Atualizar(EntidadeBase entidadeAtualizada)
+    public override void Atualizar(RequisicaoEntrada entidadeAtualizada)
     {
-        RequisicaoEntrada requisicaoAtualizada = (RequisicaoEntrada)entidadeAtualizada;
-
-        Medicamento = requisicaoAtualizada.Medicamento;
-        Quantidade = requisicaoAtualizada.Quantidade;
-        Funcionario = requisicaoAtualizada.Funcionario;
+        Medicamento = entidadeAtualizada.Medicamento;
+        Quantidade = entidadeAtualizada.Quantidade;
+        Funcionario = entidadeAtualizada.Funcionario;
+        Data = entidadeAtualizada.Data;
     }
 }

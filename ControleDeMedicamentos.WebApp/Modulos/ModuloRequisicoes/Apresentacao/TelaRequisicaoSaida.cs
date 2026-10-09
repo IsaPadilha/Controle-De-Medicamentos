@@ -1,19 +1,21 @@
 using ControleDeMedicamentos.WebApp.Compartilhado;
-using ControleDeMedicamentos.WebApp.ModuloMedicamentos;
-using ControleDeMedicamentos.WebApp.ModuloPacientes;
-using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
-
-namespace ControleDeMedicamentos.WebApp.ModuloRequisicoes.RequisicaoSaida;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Dominio;
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Apresentacao;
 
 public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaOpcoes, ITelaCrud
 {
-    private readonly RepositorioMedicamentoEmArquivo repositorioMedicamento;
-    private readonly RepositorioPacienteEmArquivo repositorioPaciente;
+    private readonly RepositorioMedicamentoEmOrm repositorioMedicamento;
+    private readonly RepositorioPacienteEmOrm repositorioPaciente;
 
     public TelaRequisicaoSaida(
-       RepositorioRequisicaoSaidaEmArquivo repositorio,
-        RepositorioMedicamentoEmArquivo repositorioMedicamento,
-        RepositorioPacienteEmArquivo repositorioPaciente)
+       RepositorioRequisicaoSaidaEmOrm repositorio,
+        RepositorioMedicamentoEmOrm repositorioMedicamento,
+        RepositorioPacienteEmOrm repositorioPaciente)
         : base("Requisição de Saída", repositorio)
     {
         this.repositorioMedicamento = repositorioMedicamento;
@@ -66,10 +68,10 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaOpcoes, ITela
         Console.WriteLine("---------------------------------");
 
         Console.WriteLine("Digite o ID do paciente que está realizando a entrada: ");
-        int idPaciente = Convert.ToInt32(Console.ReadLine());
+        Guid idPaciente = Guid.Parse(Console.ReadLine()!);
 
         Paciente paciente = repositorioPaciente.SelecionarPorId(idPaciente)!;
-        List<MedicamentoPrescrito> medicamentoPrescritos = [];
+        List<MedicamentoPrescrito> medicamentoPrescritos = new();
 
         while (true)
         {
@@ -77,11 +79,13 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaOpcoes, ITela
 
             Console.WriteLine("---------------------------------");
 
-            Console.Write("Digite o ID do medicamento (0 para finalizar): ");
-            int idMedicamento = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Digite o ID do medicamento (ENTER para finalizar): ");
+            string entrada = Console.ReadLine()!;
 
-            if (idMedicamento == 0)
+            if (string.IsNullOrWhiteSpace(entrada))
                 break;
+
+            Guid idMedicamento = Guid.Parse(entrada);
 
             Medicamento medicamento = repositorioMedicamento.SelecionarPorId(idMedicamento)!;
 
@@ -129,7 +133,7 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaOpcoes, ITela
         }
     }
 
-    protected override bool ExistemDependenciasAtivasDoRegistro(int idRegistro)
+    protected override bool ExistemDependenciasAtivasDoRegistro(Guid idRegistro)
     {
         return false;
     }

@@ -1,10 +1,11 @@
-namespace ControleDeMedicamentos.WebApp.Compartilhado.Dominio;
-
-public interface IRepositorio<T> where T : EntidadeBase<T>
+namespace ControleDeMedicamentos.WebApp.Compartilhado
 {
-    void Cadastrar(T entidade);
-    bool Editar(Guid idSelecionado, T entidadeAtualizada);
-    bool Excluir(Guid idSelecionado);
-    T? SelecionarPorId(Guid idSelecionado);
-    List<T> SelecionarTodos();
+    public interface IRepositorio<TEntidade>
+    {
+        void Cadastrar(TEntidade entidade);
+        bool Editar(Guid id, TEntidade entidadeAtualizada);
+        bool Excluir(Guid id);
+        List<TEntidade> SelecionarTodos();
+        TEntidade? SelecionarPorId(Guid id);
+    }
 }

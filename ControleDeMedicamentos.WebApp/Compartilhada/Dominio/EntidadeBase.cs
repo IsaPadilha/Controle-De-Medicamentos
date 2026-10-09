@@ -1,9 +1,6 @@
-namespace ControleDeMedicamentos.WebApp.Compartilhado;
-
-public abstract class EntidadeBase<T>
+public abstract class EntidadeBase<TEntidade> where TEntidade : EntidadeBase<TEntidade>
 {
     public Guid Id { get; set; }
-
     public abstract List<string> Validar();
-    public abstract void Atualizar(T entidadeAtualizada);
+    public abstract void Atualizar(TEntidade entidadeAtualizada);
 }

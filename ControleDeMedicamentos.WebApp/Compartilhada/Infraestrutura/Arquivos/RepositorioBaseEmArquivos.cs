@@ -1,6 +1,8 @@
+using ControleDeMedicamentos.WebApp.Compartilhado;
+
 namespace ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
 
-public abstract class RepositorioBaseEmArquivo<TEntidade> where TEntidade : EntidadeBase
+public abstract class RepositorioBaseEmArquivo<TEntidade> where TEntidade : EntidadeBase<TEntidade>
 {
     protected readonly ContextoJson contexto;
     protected readonly List<TEntidade> registros;
@@ -13,22 +15,14 @@ public abstract class RepositorioBaseEmArquivo<TEntidade> where TEntidade : Enti
 
     public void Cadastrar(TEntidade novoRegistro)
     {
-        int ultimoId = 0;
-
-        foreach (TEntidade r in registros)
-        {
-            if (r.Id > ultimoId)
-                ultimoId = r.Id;
-        }
-
-        novoRegistro.Id = ultimoId + 1;
+        novoRegistro.Id = Guid.NewGuid(); // gera um Guid único
 
         registros.Add(novoRegistro);
 
         contexto.Salvar();
     }
 
-    public bool Editar(int idSelecionado, TEntidade entidadeAtualizada)
+    public bool Editar(Guid idSelecionado, TEntidade entidadeAtualizada)
     {
         TEntidade? entidadeSelecionada = SelecionarPorId(idSelecionado);
 
@@ -42,7 +36,7 @@ public abstract class RepositorioBaseEmArquivo<TEntidade> where TEntidade : Enti
         return true;
     }
 
-    public bool Excluir(int idSelecionado)
+    public bool Excluir(Guid idSelecionado)
     {
         TEntidade? registro = SelecionarPorId(idSelecionado);
 
@@ -59,7 +53,7 @@ public abstract class RepositorioBaseEmArquivo<TEntidade> where TEntidade : Enti
         return true;
     }
 
-    public TEntidade? SelecionarPorId(int idSelecionado)
+    public TEntidade? SelecionarPorId(Guid idSelecionado)
     {
         foreach (TEntidade o in registros)
         {
