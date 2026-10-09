@@ -1,6 +1,6 @@
 using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Dominio;
 
-namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Infra
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Infraestrutura
 {
     public class RepositorioFuncionarioEmArquivo
     {

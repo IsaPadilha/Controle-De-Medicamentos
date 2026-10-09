@@ -1,25 +1,29 @@
-﻿// Objetivo: Rodar um servidor web
-// Servidor web: um programa que executa na rede local/remota
-// ... e espera por requisições externas ...
-// ... geralmente responde com arquivos HTML / CSS / JS (Páginas Web)
+﻿using ControleDeMedicamentos.WebApp.Compartilhado.Apresentacao;
+using ControleDeMedicamentos.WebApp.Compartilhado.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Compartilhado.Infraestrutura.Orm;
+using Microsoft.EntityFrameworkCore;
 
-// Objeto de configuração do servidor
+var builder = WebApplication.CreateBuilder(args);
 
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+// Configuração do container de injeção de dependência
+builder.Services.AddInfraRepositories(builder.Configuration);
+builder.Services.AddPresentationConfig();
 
-// Habilita o armazenamento em JSON
-builder.Services.AddInfraestruturaEmJson();
+var app = builder.Build();
 
-// Habilita o MVC = Model - View - Controller
-builder.Services.AddControllersWithViews();
+if (app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
 
-WebApplication app = builder.Build();
+    var dbContext = scope.ServiceProvider.GetRequiredService<ControleDeMedicamentosDbContext>();
 
-// Middlewares - funções que executam à cada requisição e resposta
+    if (dbContext.Database.IsSqlServer())
+        dbContext.Database.Migrate();
+}
+
+//Middlewares de roteamento
 app.UseRouting();
 app.MapDefaultControllerRoute();
 
-app.UseStaticFiles();
-
-// Executa o servidor
+//Execução do Servidor
 app.Run();

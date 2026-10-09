@@ -1,6 +1,6 @@
 namespace ControleDeMedicamentos.WebApp.Compartilhado.Apresentacao;
 
-public static class InjecaoDependencia
+public static class InjecaoDependenciaApresentacao
 {
     public static void AddPresentationConfig(this IServiceCollection services)
     {

@@ -1,10 +1,9 @@
 using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
-using ControleDeMedicamentos.WebApp.ModuloFornecedores;
-using ControleDeMedicamentos.WebApp.ModuloFuncionario;
-using ControleDeMedicamentos.WebApp.ModuloMedicamentos;
-using ControleDeMedicamentos.WebApp.ModuloPacientes;
-using ControleDeMedicamentos.WebApp.ModuloRequisicoes;
-using ControleDeMedicamentos.WebApp.ModuloRequisicoes.RequisicaoSaida;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Infraestrutura;
 
 public static class InjecaoDependencia
 {
@@ -19,11 +18,11 @@ public static class InjecaoDependencia
             return contexto;
         });
 
-        services.AddScoped<RepositorioMedicamentoEmArquivo>();
-        services.AddScoped<RepositorioFornecedorEmArquivo>();
-        services.AddScoped<RepositorioFuncionarioEmArquivos>();
-        services.AddScoped<RepositorioPacienteEmArquivo>();
-        services.AddScoped<RepositorioRequisicaoEntradaEmArquivo>();
-        services.AddScoped<RepositorioRequisicaoSaidaEmArquivo>();
+        services.AddScoped<RepositorioMedicamentoEmOrm>();
+        services.AddScoped<RepositorioFornecedorEmOrm>();
+        services.AddScoped<RepositorioFuncionarioEmOrm>();
+        services.AddScoped<RepositorioPacienteEmOrm>();
+        services.AddScoped<RepositorioRequisicaoEntradaEmOrm>();
+        services.AddScoped<RepositorioRequisicaoSaidaEmOrm>();
     }
 }
