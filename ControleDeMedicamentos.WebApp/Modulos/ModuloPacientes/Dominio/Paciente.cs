@@ -1,7 +1,7 @@
 using ControleDeMedicamentos.WebApp.Compartilhado;
 using System.Text.RegularExpressions;
 
-namespace ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Dominio;
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Dominio;
 
 public class Paciente : EntidadeBase<Paciente>
 {

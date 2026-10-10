@@ -1,6 +1,6 @@
 using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Dominio;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Dominio;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Dominio;
 using ControleDeMedicamentos.WebApp.Compartilhado.Apresentacao;
 using Microsoft.AspNetCore.Mvc;
 

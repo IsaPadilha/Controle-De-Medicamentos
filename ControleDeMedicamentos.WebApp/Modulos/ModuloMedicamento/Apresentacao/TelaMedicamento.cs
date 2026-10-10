@@ -1,15 +1,18 @@
 using ControleDeMedicamentos.WebApp.Compartilhado;
-using ControleDeMedicamentos.WebApp.ModuloFornecedores;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Infraestrutura;
 
-namespace ControleDeMedicamentos.WebApp.ModuloMedicamentos;
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Apresentacao;
 
 public class TelaMedicamento : TelaBase<Medicamento>, ITelaOpcoes, ITelaCrud
 {
-    private readonly RepositorioFornecedorEmArquivo repositorioFornecedor;
+    private readonly RepositorioFornecedorEmOrm repositorioFornecedor;
 
     public TelaMedicamento(
-        RepositorioMedicamentoEmArquivo repositorioMedicamento,
-        RepositorioFornecedorEmArquivo repositorioFornecedor
+        RepositorioMedicamentoEmOrm repositorioMedicamento,
+        RepositorioFornecedorEmOrm repositorioFornecedor
     ) : base("Medicamento", repositorioMedicamento)
     {
         this.repositorioFornecedor = repositorioFornecedor;
@@ -76,7 +79,7 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaOpcoes, ITelaCrud
         Console.WriteLine("---------------------------------");
 
         Console.Write("Digite o ID do fornecedor que deseja selecionar: ");
-        int idFornecedor = Convert.ToInt32(Console.ReadLine());
+        Guid idFornecedor = Guid.Parse(Console.ReadLine()!);
 
         Fornecedor fornecedor = repositorioFornecedor.SelecionarPorId(idFornecedor)!;
 
@@ -101,7 +104,7 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaOpcoes, ITelaCrud
         }
     }
 
-    protected override bool ExisteRegistroComInformacoesExclusivas(Medicamento entidade, int? idIgnorado = null)
+    protected override bool ExisteRegistroComInformacoesExclusivas(Medicamento entidade, Guid? idIgnorado = null)
     {
         List<Medicamento> registros = repositorio.SelecionarTodos();
 

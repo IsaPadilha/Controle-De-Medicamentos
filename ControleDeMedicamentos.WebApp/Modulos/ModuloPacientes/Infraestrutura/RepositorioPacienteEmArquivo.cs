@@ -1,5 +1,6 @@
 using System;
 using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Dominio;
 
 namespace ControleDeMedicamentos.WebApp.ModuloPacientes;
 

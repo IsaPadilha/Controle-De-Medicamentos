@@ -1,7 +1,7 @@
 using ControleDeMedicamentos.WebApp.Compartilhado;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Infraestrutura;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Infraestrutura;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Dominio;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Infraestrutura;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Dominio;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Dominio;

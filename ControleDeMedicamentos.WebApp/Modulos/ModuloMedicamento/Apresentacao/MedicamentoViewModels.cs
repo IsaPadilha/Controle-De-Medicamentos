@@ -1,12 +1,12 @@
-namespace ControleDeMedicamentos.WebApp.ModuloMedicamentos;
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Apresentacao;
 
 public record FornecedorMedicamentoViewModel(
-    int Id,
+    Guid Id,
     string Nome
 );
 
 public record ListarMedicamentoViewModel(
-    int Id,
+    Guid Id,
     string Nome,
     string Descricao,
     string NomeFornecedor,
@@ -16,18 +16,23 @@ public record ListarMedicamentoViewModel(
 public record CadastrarMedicamentoViewModel(
     string Nome,
     string Descricao,
-    int FornecedorId
+    Guid FornecedorId
 )
 {
     public List<FornecedorMedicamentoViewModel> Fornecedores { get; init; } = [];
 }
 
 public record EditarMedicamentoViewModel(
-    int Id,
+    Guid Id,
     string Nome,
     string Descricao,
-    int FornecedorId
+    Guid FornecedorId
 )
 {
     public List<FornecedorMedicamentoViewModel> Fornecedores { get; init; } = [];
 }
+
+public record ExcluirMedicamentoViewModel(
+    Guid Id,
+    string Nome
+);

@@ -1,6 +1,6 @@
-namespace ControleDeMedicamentos.WebApp.ModuloFuncionario;
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Apresentacao;
 
-public record ListarFuncionarioViewModel(int Id, string Nome, string Telefone);
+public record ListarFuncionarioViewModel(Guid Id, string Nome, string Telefone);
 
 public record CadastrarFuncionarioViewModel(
     string Nome,
@@ -9,13 +9,13 @@ public record CadastrarFuncionarioViewModel(
 );
 
 public record EditarFuncionarioViewModel(
-    int Id,
+    Guid Id,
     string Nome,
     string Telefone,
     string Cpf
 );
 
 public record ExcluirFuncionarioViewModel(
-    int Id,
+    Guid Id,
     string Nome
 );

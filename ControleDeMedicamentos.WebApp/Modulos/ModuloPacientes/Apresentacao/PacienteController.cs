@@ -1,13 +1,15 @@
 using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Dominio;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ControleDeMedicamentos.WebApp.ModuloPacientes;
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Apresentacao;
 
 public class PacienteController : Controller
 {
-    private readonly RepositorioPacienteEmArquivo repositorio;
+    private readonly RepositorioPacienteEmOrm repositorio;
 
-    public PacienteController(RepositorioPacienteEmArquivo repositorio)
+    public PacienteController(RepositorioPacienteEmOrm repositorio)
     {
         this.repositorio = repositorio;
     }
@@ -61,7 +63,7 @@ public class PacienteController : Controller
     }
 
     [HttpGet]
-    public ActionResult Editar(int id)
+    public ActionResult Editar(Guid id)
     {
         Paciente? paciente = repositorio.SelecionarPorId(id);
 
@@ -98,7 +100,7 @@ public class PacienteController : Controller
     }
 
     [HttpGet]
-    public ActionResult Excluir(int id)
+    public ActionResult Excluir(Guid id)
     {
         Paciente? paciente = repositorio.SelecionarPorId(id);
 
@@ -115,7 +117,7 @@ public class PacienteController : Controller
 
     [HttpPost]
     [ActionName("Excluir")]
-    public ActionResult ConfirmarExclusao(int id)
+    public ActionResult ConfirmarExclusao(Guid id)
     {
         bool conseguiuExcluir = repositorio.Excluir(id);
 

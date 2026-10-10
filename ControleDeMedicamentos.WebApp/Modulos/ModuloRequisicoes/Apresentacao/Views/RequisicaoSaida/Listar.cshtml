@@ -1,4 +1,4 @@
-@model List<ListarRequisicaoSaidaViewModel>
+@model List<ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Apresentacao.ListarRequisicaoSaidaViewModel>
 
 @{
     Layout = "_Layout";
@@ -16,7 +16,7 @@
 else
 {
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3 mt-4">
-        @foreach (ListarRequisicaoSaidaViewModel requisicao in Model)
+        @foreach (var requisicao in Model)
         {
             <div class="col">
                 <article class="card h-100">
@@ -28,10 +28,10 @@ else
                         <p class="card-text"><strong>Data:</strong> @requisicao.Data.ToShortDateString()</p>
                         <h3 class="h6">Medicamentos</h3>
                         <ul class="mb-0">
-                            @foreach (ListarMedicamentoPrescritoRequisicaoSaidaViewModel medicamento in
+                            @foreach (var medicamento in
                     requisicao.MedicamentosPrescritos)
                             {
-                                <li>@medicamento.Nome: @medicamento.Quantidade</li>
+                                <li>@medicamento.NomeMedicamento: @medicamento.Quantidade</li>
                             }
                         </ul>
                     </div>

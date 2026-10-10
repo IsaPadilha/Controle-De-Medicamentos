@@ -1,5 +1,4 @@
-@model CadastrarRequisicaoSaidaViewModel
-
+@model ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Apresentacao.CadastrarRequisicaoSaidaViewModel
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Cadastrar Requisição de Saída";
@@ -13,7 +12,7 @@
             <label class="form-label" asp-for="PacienteId">Paciente</label>
             <select class="form-select" asp-for="PacienteId">
                 <option value="0">Selecione um paciente</option>
-                @foreach (PacienteRequisicaoSaidaViewModel paciente in Model.Pacientes)
+                @foreach (var paciente in Model.Pacientes)
                 {
                     <option value="@paciente.Id">@paciente.Nome</option>
                 }
@@ -43,8 +42,7 @@
                         <tbody>
                             @for (int indice = 0; indice < Model.MedicamentosPrescritos.Count; indice++)
                             {
-                                MedicamentoPrescritoRequisicaoSaidaViewModel medicamentoPrescrito =
-                        Model.MedicamentosPrescritos[indice];
+                                var medicamentoPrescrito = Model.MedicamentosPrescritos[indice];
 
                                 <tr>
                                     <td>
@@ -52,7 +50,7 @@
                                         <input class="form-check-input" asp-for="MedicamentosPrescritos[indice].Selecionado">
                                     </td>
                                     <td>@medicamentoPrescrito.NomeMedicamento</td>
-                                    <td>@medicamentoPrescrito.QuantidadeEmEstoque</td>
+                                    <td>@medicamentoPrescrito.EstoqueAtual</td>
                                     <td>
                                         <input class="form-control" asp-for="MedicamentosPrescritos[indice].Quantidade"
                                                type="number">

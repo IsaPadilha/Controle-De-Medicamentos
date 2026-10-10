@@ -1,18 +1,19 @@
-using ControleDeMedicamentos.WebApp.Compartilhado;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Dominio;
 using ControleDeMedicamentos.WebApp.Compartilhado.Infraestrutura.Orm;
-using Microsoft.AspNetCore.Routing.Constraints;
 
-namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Infraestrutura
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Infraestrutura
 {
-    public sealed class RepositorioFuncionarioEmOrm : IRepositorioFuncionario
+    public sealed class RepositorioFuncionarioEmOrm : RepositorioBaseEmOrm<Funcionario>, IRepositorioFuncionario
     {
         private readonly ControleDeMedicamentosDbContext dbContext;
 
-        public RepositorioFuncionarioEmOrm(ControleDeMedicamentosDbContext dbContext)
+        public RepositorioFuncionarioEmOrm(
+    ControleDeMedicamentosDbContext dbContext)
+    : base(dbContext)
         {
             this.dbContext = dbContext;
         }
+
 
         public void Cadastrar(Funcionario entidade)
         {

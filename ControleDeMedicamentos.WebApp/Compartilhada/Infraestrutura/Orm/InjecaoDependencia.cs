@@ -1,12 +1,12 @@
 using ControleDeMedicamentos.WebApp.Compartilhado.Infraestrutura.Orm;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Dominio;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Infraestrutura;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Dominio;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Infraestrutura;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Dominio;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Infraestrutura;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Dominio;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Infraestrutura;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Dominio;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Infraestrutura;
 using Microsoft.EntityFrameworkCore;

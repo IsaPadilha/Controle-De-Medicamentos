@@ -1,13 +1,16 @@
 using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Apresentacao;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ControleDeMedicamentos.WebApp.ModuloFuncionario;
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Apresentacao;
 
 public sealed class FuncionarioController : Controller
 {
-    private readonly RepositorioFuncionarioEmArquivos repositorioFuncionario;
+    private readonly RepositorioFuncionarioEmOrm repositorioFuncionario;
 
-    public FuncionarioController(RepositorioFuncionarioEmArquivos repositorioFuncionario)
+    public FuncionarioController(RepositorioFuncionarioEmOrm repositorioFuncionario)
     {
         this.repositorioFuncionario = repositorioFuncionario;
     }
@@ -55,7 +58,7 @@ public sealed class FuncionarioController : Controller
     }
 
     [HttpGet]
-    public ActionResult Editar(int id)
+    public ActionResult Editar(Guid id)
     {
         Funcionario? funcionarioSelecionado = repositorioFuncionario.SelecionarPorId(id);
 
@@ -90,7 +93,7 @@ public sealed class FuncionarioController : Controller
     }
 
     [HttpGet]
-    public ActionResult Excluir(int id)
+    public ActionResult Excluir(Guid id)
     {
         Funcionario? funcionarioSelecionado = repositorioFuncionario.SelecionarPorId(id);
 

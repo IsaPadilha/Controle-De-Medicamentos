@@ -1,8 +1,8 @@
-using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Dominio;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Infraestrutura
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Infraestrutura
 {
     public sealed class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
     {

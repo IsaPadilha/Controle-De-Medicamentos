@@ -1,4 +1,4 @@
-@model Medicamento;
+@model ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Apresentacao.EditarMedicamentoViewModel
 
 @{
     Layout = "_Layout";
@@ -23,9 +23,9 @@
         <label for="fornecedorId">Fornecedor</label>
         <br />
         <select id="fornecedorId" name="fornecedorId">
-            @foreach (Fornecedor f in ViewBag.Fornecedores)
+            @foreach (var f in Model.Fornecedores)
             {
-                if (f.Id == Model.Fornecedor.Id)
+                if (f.Id == Model.FornecedorId)
                 {
                     <option value="@f.Id" selected>@f.Nome</option>
                 }

@@ -1,13 +1,17 @@
 using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Apresentacao;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Dominio;
+
 using Microsoft.AspNetCore.Mvc;
 
-namespace ControleDeMedicamentos.WebApp.ModuloFornecedores;
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Apresentacao;
 
 public sealed class FornecedorController : Controller
 {
-    private readonly RepositorioFornecedorEmArquivo repositorio;
+    private readonly IRepositorioFornecedor repositorio;
 
-    public FornecedorController(RepositorioFornecedorEmArquivo repositorio)
+    public FornecedorController(IRepositorioFornecedor repositorio)
     {
         this.repositorio = repositorio;
     }
@@ -68,9 +72,9 @@ public sealed class FornecedorController : Controller
     }
 
     [HttpGet]
-    public ActionResult Editar(int id)
+    public ActionResult Editar(Guid id)
     {
-        Fornecedor fornecedorSelecionado = repositorio.SelecionarPorId(id);
+        Fornecedor fornecedorSelecionado = repositorio.SelecionarPorId(id)!;
 
         if (fornecedorSelecionado == null)
             return NotFound();
@@ -106,7 +110,7 @@ public sealed class FornecedorController : Controller
     }
 
     [HttpGet]
-    public ActionResult Excluir(int id)
+    public ActionResult Excluir(Guid id)
     {
         Fornecedor? fornecedorSelecionado = repositorio.SelecionarPorId(id);
 

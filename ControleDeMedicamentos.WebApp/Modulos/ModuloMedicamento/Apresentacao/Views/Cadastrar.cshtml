@@ -1,9 +1,9 @@
+@model ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Apresentacao.CadastrarMedicamentoViewModel
+
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Cadastro de Medicamento";
 }
-
-@model CadastrarMedicamentoViewModel;
 
 <div class="row justify-content-start">
     <form class="col-lg-6" asp-action="Cadastrar" method="post">
@@ -21,7 +21,7 @@
         <div class="mt-4">
             <label class="form-label" asp-for="FornecedorId">Fornecedor</label>
             <select class="form-select" asp-for="FornecedorId">
-                @foreach (FornecedorMedicamentoViewModel f in Model.Fornecedores)
+                @foreach (var f in Model.Fornecedores)
                 {
                     <option value="@f.Id">@f.Nome</option>
                 }

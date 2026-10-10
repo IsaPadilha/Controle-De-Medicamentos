@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using System;
 
-namespace ControleDeMedicamentos.WebApp.ModuloFornecedores;
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Apresentacao;
 
-public record ListarFornecedorViewModel(int Id, string Nome, string Telefone, string Cnpj);
+public record ListarFornecedorViewModel(Guid Id, string Nome, string Telefone, string Cnpj);
 
 public record CadastrarFornecedorViewModel(
     [Required(ErrorMessage = "O campo \"Nome\" é obrigatório.")]
@@ -21,13 +22,13 @@ public record CadastrarFornecedorViewModel(
 );
 
 public record EditarFornecedorViewModel(
-    int Id,
+    Guid Id,
     string Nome,
     string Telefone,
     string Cnpj
 );
 
 public record ExcluirFornecedorViewModel(
-    int Id,
+    Guid Id,
     string Nome
 );

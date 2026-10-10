@@ -1,12 +1,13 @@
 using ControleDeMedicamentos.WebApp.Compartilhado;
 using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Dominio;
 
-namespace ControleDeMedicamentos.WebApp.ModuloPacientes;
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Apresentacao;
 
 public class TelaPaciente : TelaBase<Paciente>, ITelaOpcoes, ITelaCrud
 {
     public TelaPaciente(
-        RepositorioBaseEmArquivo<Paciente> repositorio)
+        IRepositorio<Paciente> repositorio)
         : base("Paciente", repositorio)
     {
     }
@@ -61,7 +62,7 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaOpcoes, ITelaCrud
         return new Paciente(nome, telefone, cartaoSus, cpf);
     }
 
-    protected override bool ExisteRegistroComInformacoesExclusivas(Paciente entidade, int? idIgnorado = null)
+    protected override bool ExisteRegistroComInformacoesExclusivas(Paciente entidade, Guid? idIgnorado = null)
     {
         List<Paciente> registros = repositorio.SelecionarTodos();
 

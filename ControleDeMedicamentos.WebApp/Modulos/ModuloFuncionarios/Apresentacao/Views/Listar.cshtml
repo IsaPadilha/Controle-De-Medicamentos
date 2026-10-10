@@ -1,4 +1,4 @@
-@model List<ListarFuncionarioViewModel>
+@model List<ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Apresentacao.ListarFuncionarioViewModel>
 
 @{
     Layout = "_Layout";
@@ -20,7 +20,7 @@
 else
 {
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3 mt-4">
-        @foreach (ListarFuncionarioViewModel f in Model)
+        @foreach (var f in Model)
         {
             <div class="col">
                 <div class="card h-100">
@@ -36,11 +36,12 @@ else
                         </dl>
 
                         <div class="d-flex gap-2 justify-content-end mt-auto">
-                            <a class="btn btn-sm btn-outline-primary" title="Editar" asp-action="Editar" asp-route-id="@f.Id">
-                                <i class="bi bi-pencil"></i>
+                            <a class="btn btn-sm btn-outline-primary" asp-action="Editar" asp-route-id="@f.Id">
+                                Editar
                             </a>
-                            <a class="btn btn-sm btn-outline-danger" title="Excluir" asp-action="Excluir" asp-route-id="@f.Id">
-                                <i class="bi bi-trash3"></i>
+
+                            <a class="btn btn-sm btn-outline-danger" asp-action="Excluir" asp-route-id="@f.Id">
+                                Excluir
                             </a>
                         </div>
                     </div>

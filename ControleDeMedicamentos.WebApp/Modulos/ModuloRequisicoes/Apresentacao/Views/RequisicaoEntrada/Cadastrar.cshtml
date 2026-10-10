@@ -1,5 +1,4 @@
-@model CadastrarRequisicaoEntradaViewModel
-
+@model ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Apresentacao.CadastrarRequisicaoEntradaViewModel
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Cadastrar Requisição de Entrada";
@@ -11,7 +10,7 @@
             <label class="form-label" asp-for="MedicamentoId">Medicamento</label>
             <select class="form-select" asp-for="MedicamentoId">
                 <option value="0">Selecione um medicamento</option>
-                @foreach (MedicamentoRequisicaoEntradaViewModel medicamento in Model.Medicamentos)
+                @foreach (var medicamento in Model.Medicamentos)
                 {
                     <option value="@medicamento.Id">@medicamento.Nome</option>
                 }
@@ -22,7 +21,7 @@
             <label class="form-label" asp-for="FuncionarioId">Funcionário</label>
             <select class="form-select" asp-for="FuncionarioId">
                 <option value="0">Selecione um funcionário</option>
-                @foreach (FuncionarioRequisicaoEntradaViewModel funcionario in Model.Funcionarios)
+                @foreach (var funcionario in Model.Funcionarios)
                 {
                     <option value="@funcionario.Id">@funcionario.Nome</option>
                 }

@@ -1,6 +1,6 @@
 using ControleDeMedicamentos.WebApp.Compartilhado;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Dominio;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Dominio;
 
 namespace ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Dominio;
 

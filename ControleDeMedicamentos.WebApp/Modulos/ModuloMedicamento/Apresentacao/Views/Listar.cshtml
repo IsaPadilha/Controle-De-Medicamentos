@@ -1,6 +1,4 @@
-@using ControleDeMedicamentos.WebApp.ModuloMedicamentos
-@model List<ListarMedicamentoViewModel>
-
+@model List<ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Apresentacao.ListarMedicamentoViewModel>
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Listagem de Medicamento";
@@ -22,7 +20,7 @@
 else
 {
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3 mt-4">
-        @foreach (ListarMedicamentoViewModel m in Model)
+        @foreach (var m in Model)
         {
             <div class="col">
                 <div class="card h-100">

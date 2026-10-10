@@ -1,11 +1,15 @@
 using System.Net.Http.Headers;
-using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
-using ControleDeMedicamentos.WebApp.ModuloFornecedores;
-using ControleDeMedicamentos.WebApp.ModuloFuncionario;
-using ControleDeMedicamentos.WebApp.ModuloMedicamentos;
-using ControleDeMedicamentos.WebApp.ModuloPacientes;
-using ControleDeMedicamentos.WebApp.ModuloRequisicoes;
-using ControleDeMedicamentos.WebApp.ModuloRequisicoes.RequisicaoSaida;
+using ControleDeMedicamentos.WebApp.Compartilhado.Infraestrutura.Orm;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Apresentacao;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Apresentacao;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Apresentacao;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Apresentacao;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Apresentacao;
 
 namespace ControleDeMedicamentos.WebApp.Compartilhado;
 
@@ -18,14 +22,14 @@ public class TelaPrincipal
     private readonly TelaPaciente telaPaciente;
     private readonly TelaFuncionario telaFuncionario;
 
-    public TelaPrincipal(ContextoJson contexto)
+    public TelaPrincipal(ControleDeMedicamentosDbContext contexto)
     {
-        RepositorioFornecedorEmArquivo repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
-        RepositorioMedicamentoEmArquivo repositorioMedicamento = new RepositorioMedicamentoEmArquivo(contexto);
-        RepositorioRequisicaoEntradaEmArquivo repositorioRequisicaoEntrada = new RepositorioRequisicaoEntradaEmArquivo(contexto);
-        RepositorioRequisicaoSaidaEmArquivo repositorioRequisicaoSaida = new RepositorioRequisicaoSaidaEmArquivo(contexto);
-        RepositorioPacienteEmArquivo repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
-        RepositorioFuncionarioEmArquivos repositorioFuncionario = new RepositorioFuncionarioEmArquivos(contexto);
+        RepositorioFornecedorEmOrm repositorioFornecedor = new RepositorioFornecedorEmOrm(contexto);
+        RepositorioMedicamentoEmOrm repositorioMedicamento = new RepositorioMedicamentoEmOrm(contexto);
+        RepositorioRequisicaoEntradaEmOrm repositorioRequisicaoEntrada = new RepositorioRequisicaoEntradaEmOrm(contexto);
+        RepositorioRequisicaoSaidaEmOrm repositorioRequisicaoSaida = new RepositorioRequisicaoSaidaEmOrm(contexto);
+        RepositorioPacienteEmOrm repositorioPaciente = new RepositorioPacienteEmOrm(contexto);
+        RepositorioFuncionarioEmOrm repositorioFuncionario = new RepositorioFuncionarioEmOrm(contexto);
 
         telaFornecedor = new TelaFornecedor(repositorioFornecedor);
         telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);

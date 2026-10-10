@@ -1,9 +1,9 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Dominio;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Dominio;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Dominio;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Dominio;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Dominio;
 
 namespace ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;

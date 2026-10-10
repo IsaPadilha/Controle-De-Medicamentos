@@ -1,8 +1,8 @@
 using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Dominio;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Dominio;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Dominio;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Infraestrutura;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Dominio;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Dominio;
 using Microsoft.EntityFrameworkCore;
 

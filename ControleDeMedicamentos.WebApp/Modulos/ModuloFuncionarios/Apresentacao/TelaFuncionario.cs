@@ -1,11 +1,12 @@
 using ControleDeMedicamentos.WebApp.Compartilhado;
-using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Dominio;
+using ControleDeMedicamentos.WebApp.Compartilhado.Infraestrutura.Orm;
 
-namespace ControleDeMedicamentos.WebApp.ModuloFuncionario;
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Apresentacao;
 
 public class TelaFuncionario : TelaBase<Funcionario>, ITelaOpcoes, ITelaCrud
 {
-    public TelaFuncionario(RepositorioBaseEmArquivo<Funcionario> repositorio) : base("Funcionario", repositorio)
+    public TelaFuncionario(RepositorioBaseEmOrm<Funcionario> repositorio) : base("Funcionario", repositorio)
     {
     }
 
@@ -56,7 +57,7 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaOpcoes, ITelaCrud
         return new Funcionario(nome, telefone, cpf);
     }
 
-    protected override bool ExisteRegistroComInformacoesExclusivas(Funcionario entidade, int? idIgnorado = null)
+    protected override bool ExisteRegistroComInformacoesExclusivas(Funcionario entidade, Guid? idIgnorado = null)
     {
         List<Funcionario> registros = repositorio.SelecionarTodos();
 

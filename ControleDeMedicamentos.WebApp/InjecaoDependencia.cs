@@ -1,8 +1,8 @@
 using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Infraestrutura;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Infraestrutura;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Infraestrutura;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Infraestrutura;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Infraestrutura;
 
 public static class InjecaoDependencia

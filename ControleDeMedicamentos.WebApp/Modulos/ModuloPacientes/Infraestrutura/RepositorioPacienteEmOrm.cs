@@ -1,54 +1,60 @@
 using ControleDeMedicamentos.WebApp.Compartilhado;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Dominio;
 using ControleDeMedicamentos.WebApp.Compartilhado.Infraestrutura.Orm;
 
-namespace ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Infraestrutura
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Infraestrutura;
+
+public sealed class RepositorioPacienteEmOrm : IRepositorioPaciente
 {
-    public sealed class RepositorioPacienteEmOrm : IRepositorioPaciente
+    private readonly ControleDeMedicamentosDbContext dbContext;
+
+    public RepositorioPacienteEmOrm(ControleDeMedicamentosDbContext dbContext)
     {
-        private readonly ControleDeMedicamentosDbContext dbContext;
+        this.dbContext = dbContext;
+    }
 
-        public RepositorioPacienteEmOrm(ControleDeMedicamentosDbContext dbContext)
-        {
-            this.dbContext = dbContext;
-        }
+    public void Cadastrar(Paciente entidade)
+    {
+        dbContext.Pacientes.Add(entidade);
+        dbContext.SaveChanges();
+    }
 
-        public void Inserir(Paciente entidade)
-        {
-            dbContext.Pacientes.Add(entidade);
-            dbContext.SaveChanges();
-        }
+    public bool Editar(Guid idSelecionado, Paciente entidadeAtualizada)
+    {
+        Paciente? pacienteSelecionado = SelecionarPorId(idSelecionado);
 
-        public void Editar(Guid idSelecionado, Paciente entidadeAtualizada)
-        {
-            var pacienteSelecionado = SelecionarPorId(idSelecionado);
+        if (pacienteSelecionado == null)
+            return false;
 
-            if (pacienteSelecionado == null)
-                return;
+        pacienteSelecionado.Atualizar(entidadeAtualizada);
 
-            pacienteSelecionado.Atualizar(entidadeAtualizada);
-            dbContext.SaveChanges();
-        }
+        dbContext.SaveChanges();
 
-        public void Excluir(Guid idSelecionado)
-        {
-            var pacienteSelecionado = SelecionarPorId(idSelecionado);
+        return true;
+    }
 
-            if (pacienteSelecionado == null)
-                return;
+    public bool Excluir(Guid idSelecionado)
+    {
+        Paciente? pacienteSelecionado = SelecionarPorId(idSelecionado);
 
-            dbContext.Pacientes.Remove(pacienteSelecionado);
-            dbContext.SaveChanges();
-        }
+        if (pacienteSelecionado == null)
+            return false;
 
-        public Paciente? SelecionarPorId(Guid idSelecionado)
-        {
-            return dbContext.Pacientes.SingleOrDefault(p => p.Id == idSelecionado);
-        }
+        dbContext.Pacientes.Remove(pacienteSelecionado);
 
-        public List<Paciente> SelecionarTodos()
-        {
-            return dbContext.Pacientes.ToList();
-        }
+        dbContext.SaveChanges();
+
+        return true;
+    }
+
+    public Paciente? SelecionarPorId(Guid idSelecionado)
+    {
+        return dbContext.Pacientes
+            .SingleOrDefault(p => p.Id == idSelecionado);
+    }
+
+    public List<Paciente> SelecionarTodos()
+    {
+        return dbContext.Pacientes.ToList();
     }
 }

@@ -1,8 +1,8 @@
-using ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Dominio;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ControleDeMedicamentos.WebApp.Modulos.ModuloPaciente.Infraestrutura
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Infraestrutura
 {
     public sealed class PacienteConfiguration : IEntityTypeConfiguration<Paciente>
     {

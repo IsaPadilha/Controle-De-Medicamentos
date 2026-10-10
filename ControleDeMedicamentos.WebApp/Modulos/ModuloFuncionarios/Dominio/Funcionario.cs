@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 using ControleDeMedicamentos.WebApp.Compartilhado;
 
 
-namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Dominio
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Dominio
 {
     public class Funcionario : EntidadeBase<Funcionario>
     {

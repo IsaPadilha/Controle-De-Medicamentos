@@ -1,17 +1,21 @@
 using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
-using ControleDeMedicamentos.WebApp.ModuloFornecedores;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFornecedores.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Infraestrutura;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Dominio;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
-namespace ControleDeMedicamentos.WebApp.ModuloMedicamentos;
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Apresentacao;
 
 public sealed class MedicamentoController : Controller
 {
-    private readonly RepositorioMedicamentoEmArquivo repositorioMedicamento;
-    private readonly RepositorioFornecedorEmArquivo repositorioFornecedor;
+    private readonly RepositorioMedicamentoEmOrm repositorioMedicamento;
+    private readonly RepositorioFornecedorEmOrm repositorioFornecedor;
 
     public MedicamentoController(
-        RepositorioMedicamentoEmArquivo repositorioMedicamento,
-        RepositorioFornecedorEmArquivo repositorioFornecedor
+        RepositorioMedicamentoEmOrm repositorioMedicamento,
+        RepositorioFornecedorEmOrm repositorioFornecedor
         )
     {
         this.repositorioMedicamento = repositorioMedicamento;
@@ -47,7 +51,7 @@ public sealed class MedicamentoController : Controller
         CadastrarMedicamentoViewModel viewModel = new CadastrarMedicamentoViewModel(
             string.Empty,
             string.Empty,
-            0
+            Guid.Empty
         ) with
         { Fornecedores = ObterFornecedores() };
 
@@ -70,7 +74,7 @@ public sealed class MedicamentoController : Controller
     }
 
     [HttpGet]
-    public ActionResult Editar(int id)
+    public ActionResult Editar(Guid id)
     {
         Medicamento? medicamento = repositorioMedicamento.SelecionarPorId(id);
 
@@ -109,7 +113,7 @@ public sealed class MedicamentoController : Controller
     }
 
     [HttpGet]
-    public ActionResult Excluir(int id)
+    public ActionResult Excluir(Guid id)
     {
         Medicamento? medicamento = repositorioMedicamento.SelecionarPorId(id);
 
@@ -121,7 +125,7 @@ public sealed class MedicamentoController : Controller
 
     [HttpPost]
     [ActionName("Excluir")]
-    public ActionResult ConfirmarExclusao(int id)
+    public ActionResult ConfirmarExclusao(Guid id)
     {
         bool conseguiuExcluir = repositorioMedicamento.Excluir(id);
 

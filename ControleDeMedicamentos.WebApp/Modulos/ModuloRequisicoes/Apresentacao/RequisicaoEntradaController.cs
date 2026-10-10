@@ -1,5 +1,5 @@
 using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Dominio;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionario.Dominio;
+using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Dominio;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Dominio;
 using Microsoft.AspNetCore.Mvc;
 

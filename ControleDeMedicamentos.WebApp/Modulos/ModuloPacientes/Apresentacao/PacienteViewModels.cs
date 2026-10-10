@@ -1,7 +1,7 @@
-namespace ControleDeMedicamentos.WebApp.ModuloPacientes;
+namespace ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Apresentacao;
 
 public record ListarPacienteViewModel(
-    int Id,
+    Guid Id,
     string Nome,
     string Telefone,
     string CartaoSus
@@ -15,7 +15,7 @@ public record CadastrarPacienteViewModel(
 );
 
 public record EditarPacienteViewModel(
-    int Id,
+    Guid Id,
     string Nome,
     string Telefone,
     string CartaoSus,
@@ -23,6 +23,6 @@ public record EditarPacienteViewModel(
 );
 
 public record ExcluirPacienteViewModel(
-    int Id,
+    Guid Id,
     string Nome
 );
