@@ -13,17 +13,25 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
+}
+
+if (app.Environment.IsDevelopment())
+{
     using var scope = app.Services.CreateScope();
 
-    var dbContext = scope.ServiceProvider.GetRequiredService<ControleDeMedicamentosDbContext>();
+    var dbContext = scope.ServiceProvider
+        .GetRequiredService<ControleDeMedicamentosDbContext>();
 
     if (dbContext.Database.IsSqlServer())
         dbContext.Database.Migrate();
 }
 
-//Middlewares de roteamento
+// Middlewares de roteamento
 app.UseRouting();
+app.UseStaticFiles();
+
 app.MapDefaultControllerRoute();
 
-//Execução do Servidor
+// Execução do Servidor
 app.Run();

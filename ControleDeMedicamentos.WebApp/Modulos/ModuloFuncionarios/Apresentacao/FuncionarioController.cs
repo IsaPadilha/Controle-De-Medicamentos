@@ -1,16 +1,16 @@
 using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Dominio;
-using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Infraestrutura;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Apresentacao;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace ControleDeMedicamentos.WebApp.Modulos.ModuloFuncionarios.Apresentacao;
 
 public sealed class FuncionarioController : Controller
 {
-    private readonly RepositorioFuncionarioEmOrm repositorioFuncionario;
+    private readonly IRepositorioFuncionario repositorioFuncionario;
 
-    public FuncionarioController(RepositorioFuncionarioEmOrm repositorioFuncionario)
+    public FuncionarioController(IRepositorioFuncionario repositorioFuncionario)
     {
         this.repositorioFuncionario = repositorioFuncionario;
     }
@@ -24,32 +24,37 @@ public sealed class FuncionarioController : Controller
 
         foreach (Funcionario f in funcionarios)
         {
-            // Records são objetos imutáveis
             ListarFuncionarioViewModel vm = new ListarFuncionarioViewModel(
                 f.Id,
                 f.Nome,
-                f.Telefone
+                f.Telefone,
+                f.Cpf
             );
 
             viewModels.Add(vm);
         }
 
-        return View(viewModels);
+        return View(
+    "~/Modulos/ModuloFuncionarios/Apresentacao/Views/Listar.cshtml",
+    viewModels
+);
     }
 
     [HttpGet]
     public ActionResult Cadastrar()
     {
-        return View();
+        return View("~/Modulos/ModuloFuncionarios/Apresentacao/Views/Cadastrar.cshtml");
     }
 
     [HttpPost]
     public ActionResult Cadastrar(CadastrarFuncionarioViewModel cadastrarVm)
     {
+        string cpfSemMascara = Regex.Replace(cadastrarVm.Cpf, @"\D", "");
+
         Funcionario funcionario = new Funcionario(
             cadastrarVm.Nome,
             cadastrarVm.Telefone,
-            cadastrarVm.Cpf
+            cpfSemMascara
         );
 
         repositorioFuncionario.Cadastrar(funcionario);
@@ -72,19 +77,27 @@ public sealed class FuncionarioController : Controller
             funcionarioSelecionado.Cpf
         );
 
-        return View(viewModel);
+        return View(
+    "~/Modulos/ModuloFuncionarios/Apresentacao/Views/Editar.cshtml",
+    viewModel
+);
     }
 
     [HttpPost]
     public ActionResult Editar(EditarFuncionarioViewModel editarVm)
     {
+        string cpfSemMascara = Regex.Replace(editarVm.Cpf, @"\D", "");
+
         Funcionario funcionarioAtualizado = new Funcionario(
             editarVm.Nome,
             editarVm.Telefone,
-            editarVm.Cpf
+            cpfSemMascara
         );
 
-        bool conseguiuEditar = repositorioFuncionario.Editar(editarVm.Id, funcionarioAtualizado);
+        bool conseguiuEditar = repositorioFuncionario.Editar(
+            editarVm.Id,
+            funcionarioAtualizado
+        );
 
         if (!conseguiuEditar)
             return NotFound();
@@ -105,7 +118,7 @@ public sealed class FuncionarioController : Controller
             funcionarioSelecionado.Nome
         );
 
-        return View(viewModel);
+        return View("~/Modulos/ModuloFuncionarios/Apresentacao/Views/Excluir.cshtml", viewModel);
     }
 
     [HttpPost]

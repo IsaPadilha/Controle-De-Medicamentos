@@ -22,10 +22,10 @@ namespace ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Infraestrutura
                 .IsRequired();
 
             builder
-                .HasOne(r => r.Medicamento)
-                .WithMany() // se quiser, pode criar uma coleção em Medicamento
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+    .HasOne(r => r.Medicamento)
+    .WithMany(m => m.Requisicoes)
+    .IsRequired()
+    .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .HasOne(r => r.Funcionario)

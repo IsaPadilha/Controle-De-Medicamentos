@@ -4,7 +4,8 @@ public record ListarPacienteViewModel(
     Guid Id,
     string Nome,
     string Telefone,
-    string CartaoSus
+    string CartaoSus,
+    string Cpf
 );
 
 public record CadastrarPacienteViewModel(

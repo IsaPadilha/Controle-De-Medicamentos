@@ -6,6 +6,7 @@ public class HomeController : Controller
 {
     public ActionResult Index()
     {
+        // O Program.cs já sabe procurar nas pastas compartilhadas
         return View();
     }
 }

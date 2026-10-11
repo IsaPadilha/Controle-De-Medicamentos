@@ -10,16 +10,45 @@ namespace ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Apresentacao;
 
 public sealed class MedicamentoController : Controller
 {
-    private readonly RepositorioMedicamentoEmOrm repositorioMedicamento;
-    private readonly RepositorioFornecedorEmOrm repositorioFornecedor;
+    private readonly IRepositorioMedicamento repositorioMedicamento;
+    private readonly IRepositorioFornecedor repositorioFornecedor;
 
     public MedicamentoController(
-        RepositorioMedicamentoEmOrm repositorioMedicamento,
-        RepositorioFornecedorEmOrm repositorioFornecedor
-        )
+        IRepositorioMedicamento repositorioMedicamento,
+        IRepositorioFornecedor repositorioFornecedor)
     {
         this.repositorioMedicamento = repositorioMedicamento;
         this.repositorioFornecedor = repositorioFornecedor;
+    }
+
+    [HttpGet]
+    public ActionResult Cadastrar()
+    {
+        CadastrarMedicamentoViewModel viewModel = new CadastrarMedicamentoViewModel(
+            string.Empty,
+            string.Empty,
+            Guid.Empty
+        ) with
+        {
+            Fornecedores = ObterFornecedores()
+        };
+
+        return View(viewModel);
+    }
+
+    [HttpPost]
+    public ActionResult Cadastrar(CadastrarMedicamentoViewModel viewModel)
+    {
+        Fornecedor? fornecedor = repositorioFornecedor.SelecionarPorId(viewModel.FornecedorId);
+
+        if (fornecedor == null)
+            return NotFound();
+
+        Medicamento medicamento = new Medicamento(viewModel.Nome, viewModel.Descricao, fornecedor);
+
+        repositorioMedicamento.Cadastrar(medicamento);
+
+        return RedirectToAction(nameof(Listar));
     }
 
     [HttpGet]
@@ -46,34 +75,6 @@ public sealed class MedicamentoController : Controller
     }
 
     [HttpGet]
-    public ActionResult Cadastrar()
-    {
-        CadastrarMedicamentoViewModel viewModel = new CadastrarMedicamentoViewModel(
-            string.Empty,
-            string.Empty,
-            Guid.Empty
-        ) with
-        { Fornecedores = ObterFornecedores() };
-
-        return View(viewModel);
-    }
-
-    [HttpPost]
-    public ActionResult Cadastrar(CadastrarMedicamentoViewModel viewModel)
-    {
-        Fornecedor? fornecedor = repositorioFornecedor.SelecionarPorId(viewModel.FornecedorId);
-
-        if (fornecedor == null)
-            return NotFound();
-
-        Medicamento medicamento = new Medicamento(viewModel.Nome, viewModel.Descricao, fornecedor);
-
-        repositorioMedicamento.Cadastrar(medicamento);
-
-        return RedirectToAction(nameof(Listar));
-    }
-
-    [HttpGet]
     public ActionResult Editar(Guid id)
     {
         Medicamento? medicamento = repositorioMedicamento.SelecionarPorId(id);
@@ -82,11 +83,11 @@ public sealed class MedicamentoController : Controller
             return NotFound();
 
         EditarMedicamentoViewModel viewModel = new EditarMedicamentoViewModel(
-            id,
+            medicamento.Id,
             medicamento.Nome,
             medicamento.Descricao,
             medicamento.Fornecedor.Id
-        ) with
+        )
         {
             Fornecedores = ObterFornecedores()
         };

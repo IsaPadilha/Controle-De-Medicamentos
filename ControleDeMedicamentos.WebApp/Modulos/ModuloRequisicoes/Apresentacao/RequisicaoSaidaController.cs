@@ -30,15 +30,17 @@ namespace ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Apresentacao
 
             foreach (var requisicao in repositorio.SelecionarTodos())
             {
-                var medicamentosPrescritosVMs = new List<ListarMedicamentoPrescritoRequisicaoSaidaViewModel>();
+                var medicamentosPrescritosVMs =
+                    new List<ListarMedicamentoPrescritoRequisicaoSaidaViewModel>();
 
                 foreach (var prescrito in requisicao.MedicamentoPrescritos)
                 {
-                    var prescritoVm = new ListarMedicamentoPrescritoRequisicaoSaidaViewModel(
-                        prescrito.Medicamento.Id,
-                        prescrito.Medicamento.Nome,
-                        prescrito.Quantidade
-                    );
+                    var prescritoVm =
+                        new ListarMedicamentoPrescritoRequisicaoSaidaViewModel(
+                            prescrito.Medicamento.Id,
+                            prescrito.Medicamento.Nome,
+                            prescrito.Quantidade
+                        );
 
                     medicamentosPrescritosVMs.Add(prescritoVm);
                 }
@@ -53,7 +55,10 @@ namespace ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Apresentacao
                 viewModels.Add(viewModel);
             }
 
-            return View(viewModels);
+            return View(
+                "~/Modulos/ModuloRequisicoes/Apresentacao/Views/RequisicaoSaida/Listar.cshtml",
+                viewModels
+            );
         }
 
         [HttpGet]
@@ -65,7 +70,10 @@ namespace ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Apresentacao
                 MedicamentosPrescritos = ObterMedicamentos()
             };
 
-            return View(viewModel);
+            return View(
+    "~/Modulos/ModuloRequisicoes/Apresentacao/Views/RequisicaoSaida/Cadastrar.cshtml",
+    viewModel
+);
         }
 
         [HttpPost]

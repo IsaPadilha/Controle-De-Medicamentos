@@ -2,14 +2,15 @@ using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Infraestrutura;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Dominio;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace ControleDeMedicamentos.WebApp.Modulos.ModuloPacientes.Apresentacao;
 
 public class PacienteController : Controller
 {
-    private readonly RepositorioPacienteEmOrm repositorio;
+    private readonly IRepositorioPaciente repositorio;
 
-    public PacienteController(RepositorioPacienteEmOrm repositorio)
+    public PacienteController(IRepositorioPaciente repositorio)
     {
         this.repositorio = repositorio;
     }
@@ -25,13 +26,17 @@ public class PacienteController : Controller
                 p.Id,
                 p.Nome,
                 p.Telefone,
-                p.CartaoSus
+                p.CartaoSus,
+                p.Cpf
             );
 
             viewModels.Add(viewModel);
         }
 
-        return View(viewModels);
+        return View(
+            "~/Modulos/ModuloPacientes/Apresentacao/Views/Listar.cshtml",
+            viewModels
+        );
     }
 
     [HttpGet]
@@ -44,17 +49,22 @@ public class PacienteController : Controller
             string.Empty
         );
 
-        return View(viewModel);
+        return View(
+    "~/Modulos/ModuloPacientes/Apresentacao/Views/Cadastrar.cshtml",
+    viewModel
+);
     }
 
     [HttpPost]
     public ActionResult Cadastrar(CadastrarPacienteViewModel viewModel)
     {
+        string cpfSemMascara = Regex.Replace(viewModel.Cpf, @"\D", "");
+
         Paciente paciente = new Paciente(
             viewModel.Nome,
             viewModel.Telefone,
             viewModel.CartaoSus,
-            viewModel.Cpf
+            cpfSemMascara
         );
 
         repositorio.Cadastrar(paciente);
@@ -78,20 +88,28 @@ public class PacienteController : Controller
             paciente.Cpf
         );
 
-        return View(viewModel);
+        return View(
+    "~/Modulos/ModuloPacientes/Apresentacao/Views/Editar.cshtml",
+    viewModel
+);
     }
 
     [HttpPost]
     public ActionResult Editar(EditarPacienteViewModel viewModel)
     {
+        string cpfSemMascara = Regex.Replace(viewModel.Cpf, @"\D", "");
+
         Paciente pacienteAtualizado = new Paciente(
             viewModel.Nome,
             viewModel.Telefone,
             viewModel.CartaoSus,
-            viewModel.Cpf
+            cpfSemMascara
         );
 
-        bool conseguiuEditar = repositorio.Editar(viewModel.Id, pacienteAtualizado);
+        bool conseguiuEditar = repositorio.Editar(
+            viewModel.Id,
+            pacienteAtualizado
+        );
 
         if (!conseguiuEditar)
             return NotFound();

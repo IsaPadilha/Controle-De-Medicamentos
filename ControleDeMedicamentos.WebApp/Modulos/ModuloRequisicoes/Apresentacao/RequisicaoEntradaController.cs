@@ -40,7 +40,10 @@ public class RequisicaoEntradaController : Controller
             viewModels.Add(viewModel);
         }
 
-        return View(viewModels);
+        return View(
+            "~/Modulos/ModuloRequisicoes/Apresentacao/Views/RequisicaoEntrada/Listar.cshtml",
+            viewModels
+        );
     }
 
     [HttpGet]
@@ -56,7 +59,10 @@ public class RequisicaoEntradaController : Controller
             Funcionarios = ObterFuncionarios()
         };
 
-        return View(viewModel);
+        return View(
+    "~/Modulos/ModuloRequisicoes/Apresentacao/Views/RequisicaoEntrada/Cadastrar.cshtml",
+    viewModel
+);
     }
 
     [HttpPost]

@@ -1,6 +1,7 @@
 using ControleDeMedicamentos.WebApp.Compartilhado;
 using ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Dominio;
 using ControleDeMedicamentos.WebApp.Compartilhado.Infraestrutura.Orm;
+using Microsoft.EntityFrameworkCore;
 
 namespace ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Infraestrutura
 {
@@ -50,7 +51,10 @@ namespace ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Infraestrutura
 
         public List<RequisicaoEntrada> SelecionarTodos()
         {
-            return dbContext.RequisicoesEntrada.ToList();
+            return dbContext.RequisicoesEntrada
+                .Include(r => r.Medicamento)
+                .Include(r => r.Funcionario)
+                .ToList();
         }
     }
 }

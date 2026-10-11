@@ -5,13 +5,16 @@ namespace ControleDeMedicamentos.WebApp.Modulos.ModuloRequisicoes.Dominio;
 
 public class MedicamentoPrescrito
 {
-    public Medicamento Medicamento { get; set; } = null!;
-    public int Quantidade { get; set; }
+    public MedicamentoPrescrito() { }
 
-    public RequisicaoSaida RequisicaoSaida { get; set; } = null!;
     public MedicamentoPrescrito(Medicamento medicamento, int quantidade)
     {
         Medicamento = medicamento;
         Quantidade = quantidade;
     }
+
+    public int Id { get; set; }
+    public Medicamento Medicamento { get; set; } = null!;
+    public int Quantidade { get; set; }
+    public RequisicaoSaida RequisicaoSaida { get; set; } = null!;
 }

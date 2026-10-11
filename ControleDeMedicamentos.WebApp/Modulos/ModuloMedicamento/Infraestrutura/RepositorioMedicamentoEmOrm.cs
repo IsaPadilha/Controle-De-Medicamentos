@@ -51,14 +51,32 @@ namespace ControleDeMedicamentos.WebApp.Modulos.ModuloMedicamento.Infraestrutura
         {
             return dbContext.Medicamentos
                 .Include(m => m.Fornecedor) // já traz o fornecedor junto
+                .Include(m => m.Requisicoes)
+                .Include(m => m.Saidas)
                 .SingleOrDefault(m => m.Id == idSelecionado);
         }
 
         public List<Medicamento> SelecionarTodos()
         {
-            return dbContext.Medicamentos
-                .Include(m => m.Fornecedor) // lista com fornecedor carregado
+            var medicamentos = dbContext.Medicamentos
+                .Include(m => m.Fornecedor)
+                .Include(m => m.Requisicoes)
                 .ToList();
+
+            var saidas = dbContext.RequisicoesSaida
+                .Include(r => r.MedicamentoPrescritos)
+                    .ThenInclude(mp => mp.Medicamento)
+                .ToList();
+
+            foreach (var medicamento in medicamentos)
+            {
+                medicamento.Saidas = saidas
+                    .Where(s => s.MedicamentoPrescritos
+                        .Any(mp => mp.Medicamento.Id == medicamento.Id))
+                    .ToList();
+            }
+
+            return medicamentos;
         }
     }
 }
